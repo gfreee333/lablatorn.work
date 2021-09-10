@@ -10,7 +10,7 @@
       <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludePattern pattern="packeg" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
