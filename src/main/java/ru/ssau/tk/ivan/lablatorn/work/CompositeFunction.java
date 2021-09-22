@@ -1,4 +1,4 @@
-package ru.ssau.tk._ivan_._lablatorn.work_;
+package ru.ssau.tk.ivan.lablatorn.work;
 
 public class CompositeFunction implements MathFunction {
     private final MathFunction firstFunction;
