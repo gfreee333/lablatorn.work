@@ -1,4 +1,4 @@
-package functions;
+package ru.ssau.tk._ivan_._lablatorn.work_;
 
 import org.testng.annotations.Test;
 
