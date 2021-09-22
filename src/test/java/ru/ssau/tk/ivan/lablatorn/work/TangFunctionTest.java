@@ -10,7 +10,7 @@ public class TangFunctionTest {
     @Test
     public void andThen() {
         assertEquals(first.apply(0), 0.0000, 0.0001);
-        assertEquals(first.apply(30.0), 0.5774, 0.0001);
-        assertEquals(first.apply(45.0), 1.0000, 0.0001);
+        assertEquals(first.apply(30.0), -6.4053, 0.0001);
+        assertEquals(first.apply(45.0), 1.6197, 0.0001);
     }
 }

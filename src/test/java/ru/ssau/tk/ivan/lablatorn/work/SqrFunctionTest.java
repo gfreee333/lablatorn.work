@@ -12,5 +12,4 @@ public class SqrFunctionTest {
         assertEquals(value.apply(3),9,0.0001);
         assertEquals(value.apply(4),16,0.0001);
     }
-
 }

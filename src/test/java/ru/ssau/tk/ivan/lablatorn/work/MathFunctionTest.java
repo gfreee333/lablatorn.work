@@ -13,7 +13,7 @@ public class MathFunctionTest {
     @Test
     public void andThen() {
         assertEquals(firstFunction.apply(5), 25, 0.00001);
-        assertEquals(secondFunction.apply(5), 5, 0.000001);
+        assertEquals(secondFunction.apply(5), 5, 0.00001);
         assertEquals(firstFunction.apply(-4), 25, 0.00001);
     }
 }
