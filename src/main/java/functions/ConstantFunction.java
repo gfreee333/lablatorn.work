@@ -4,6 +4,7 @@ public class ConstantFunction implements MathFunction {
     private final double invariable;
 
     public ConstantFunction(double invariable) {
+
         this.invariable = invariable;
     }
 
