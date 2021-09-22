@@ -17,6 +17,6 @@ public class MathFunctionTest {
         assertEquals(firstFunction.apply(5.0), 25.0, 0.00001);
         assertEquals(secondFunction.apply(5.0), 5.0, 0.00001);
         assertEquals(firstFunction.apply(-4.0), 25.0, 0.00001);
-        assertEquals(tang.andThen(sqr).andThen(root).apply(45.0), 1.3791, 0.0001);
+        assertEquals(tang.andThen(sqr).andThen(root).apply(45.0), 1.3792, 0.0001);
     }
 }
