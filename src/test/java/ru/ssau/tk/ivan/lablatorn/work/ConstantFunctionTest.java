@@ -7,6 +7,7 @@ import static org.testng.Assert.*;
 public class ConstantFunctionTest {
     private double pi = 3.14;
     private MathFunction value = new ConstantFunction(pi);
+
     @Test
     public void testApply() {
         double pi = 3.14;
