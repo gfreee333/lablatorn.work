@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class TangFunctionTest {
-    MathFunction first = new TangFunction();
+    private MathFunction first = new TangFunction();
 
     @Test
     public void andThen() {
