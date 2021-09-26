@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class ZeroFunctionTest {
-    private MathFunction value = new ZeroFunction();
+    private final MathFunction value = new ZeroFunction();
 
     @Test
     public void testApply() {

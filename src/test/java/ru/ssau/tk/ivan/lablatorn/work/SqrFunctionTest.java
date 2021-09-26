@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class SqrFunctionTest {
-    private MathFunction value = new SqrFunction();
+    private final MathFunction value = new SqrFunction();
 
     @Test
     public void testApply() {

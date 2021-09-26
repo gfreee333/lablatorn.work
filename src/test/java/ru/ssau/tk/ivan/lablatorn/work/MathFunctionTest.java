@@ -5,10 +5,10 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class MathFunctionTest {
-    private MathFunction first = new ConstantFunction(5.0);
-    private MathFunction sqr = new SqrFunction();
-    private MathFunction tang = new TangFunction();
-    private MathFunction root = new ThreeRootFunction();
+    private final MathFunction first = new ConstantFunction(5.0);
+    private final MathFunction sqr = new SqrFunction();
+    private final MathFunction tang = new TangFunction();
+    private final MathFunction root = new ThreeRootFunction();
     private final MathFunction firstFunction = first.andThen(sqr);
     private final MathFunction secondFunction = sqr.andThen(first);
 

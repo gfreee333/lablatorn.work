@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class ThreeRootFunctionTest {
-    private MathFunction value = new ThreeRootFunction();
+    private final MathFunction value = new ThreeRootFunction();
     public final static double DELTA = 0.0001;
 
     @Test

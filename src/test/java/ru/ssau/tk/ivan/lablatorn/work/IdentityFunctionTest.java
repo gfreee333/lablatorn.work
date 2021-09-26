@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class IdentityFunctionTest {
-    private IdentityFunction value = new IdentityFunction();
+    private final IdentityFunction value = new IdentityFunction();
     @Test
     public void testApply() {
         assertEquals(value.apply(1.2),1.2);
