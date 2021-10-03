@@ -1,6 +1,6 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
-public interface TabulatedFunction {
+public interface TabulatedFunction extends MathFunction {
     int getCount();
 
     double getX(int Index);
