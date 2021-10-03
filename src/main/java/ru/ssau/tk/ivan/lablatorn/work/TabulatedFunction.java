@@ -1,6 +1,7 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
 public interface TabulatedFunction extends MathFunction {
+
     int getCount();
 
     double getX(int Index);
@@ -15,5 +16,5 @@ public interface TabulatedFunction extends MathFunction {
 
     double leftBound();
 
-    double rigthBound();
+    double rightBound();
 }
