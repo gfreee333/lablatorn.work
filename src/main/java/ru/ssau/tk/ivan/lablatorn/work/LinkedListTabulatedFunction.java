@@ -5,7 +5,7 @@ public abstract class LinkedListTabulatedFunction extends AbstractTabulatedFunct
     private Node head; //голова списка
     private Node last; //последний узел
     protected int count;
-    protected class Node {
+    protected static class Node {
         double x;
         double y;
         Node next;
@@ -132,31 +132,4 @@ public abstract class LinkedListTabulatedFunction extends AbstractTabulatedFunct
         }
         return getCount();
     }
-
-    @Override
-    protected double extrapolateLeft(double x) {
-        if (head.x == last.x) {
-            return head.y;
-        }
-        return interpolate(x, head.x, head.next.x, head.y, head.next.y);
-    }
-
-    @Override
-    protected double extrapolateRight(double x) {
-        if (head.x == last.x) {
-            return head.y;
-        }
-        return interpolate(x, last.prev.x, last.x, last.prev.y, last.y);
-    }
-
-    @Override
-    protected double interpolate(double x, int floorIndex) {
-        if (head.x == last.x) {
-            return head.y;
-        }
-        Node leftNode = getNode(floorIndex);
-        Node rightNode = leftNode.next;
-        return interpolate(x, leftNode.x, rightNode.x, leftNode.y, rightNode.y);
-    }
-
 }
