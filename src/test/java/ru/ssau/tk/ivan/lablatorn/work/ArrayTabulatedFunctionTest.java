@@ -18,6 +18,7 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public static void testArrayTabulatedFunctionWithTwoParameters() {
         assertEquals(arrayTabulatedObject.getCount(), 4);
+
     }
 
     @Test
@@ -76,8 +77,8 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public static void testExtrapolateLeft() {
-        assertEquals(arrayTabulatedObjectTwo.extrapolateLeft(1.1), -9.949, DELTA);
-        assertEquals(arrayTabulatedObjectTwo.extrapolateLeft(0.9), -10.149, DELTA);
+        assertEquals(arrayTabulatedObjectTwo.extrapolateLeft(1.1), -3.6679, DELTA);
+        assertEquals(arrayTabulatedObjectTwo.extrapolateLeft(0.9), -5.0099, DELTA);
         assertEquals(arrayTabulatedObjectTwo.extrapolateLeft(Double.NEGATIVE_INFINITY), Double.NEGATIVE_INFINITY);
     }
 
