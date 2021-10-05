@@ -5,6 +5,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head; //голова списка
     private Node last; //последний узел
     protected int count;
+
     protected static class Node {
         double x;
         double y;
@@ -106,6 +107,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
         return -1;
     }
+
     @Override
     public int indexOfY(double y) {
         Node indexNode = head;
@@ -117,6 +119,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
         return -1;
     }
+
     @Override
     public int getCount() {
         return count;
@@ -137,6 +140,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
         return getCount();
     }
+
     @Override
     protected double extrapolateLeft(double x) {
         if (head.x == last.x) {

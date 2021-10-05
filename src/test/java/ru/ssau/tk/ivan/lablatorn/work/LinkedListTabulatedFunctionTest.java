@@ -67,40 +67,40 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(listOfArray.floorIndexOfX(4), 2, DELTA);
         assertEquals(listOfArray.floorIndexOfX(5), 2, DELTA);
         assertEquals(listOfMathFunction.floorIndexOfX(100), 60, DELTA);
-        assertEquals(listOfMathFunction.floorIndexOfX(21),2,DELTA);
-        assertEquals(listOfArray.floorIndexOfX(22),7,DELTA);
+        assertEquals(listOfMathFunction.floorIndexOfX(21), 2, DELTA);
+        assertEquals(listOfArray.floorIndexOfX(22), 7, DELTA);
     }
 
 
     @Test
     public void testExtrapolateLeft() {
-        assertEquals(listOfArray.extrapolateLeft(1.5),11,DELTA);
-        assertEquals(listOfArray.extrapolateLeft(2.5),29,DELTA);
-        assertEquals(listOfArray.extrapolateLeft(10),164,DELTA);
-        assertEquals(listOfArray.extrapolateLeft(20),344,DELTA);
+        assertEquals(listOfArray.extrapolateLeft(1.5), 11, DELTA);
+        assertEquals(listOfArray.extrapolateLeft(2.5), 29, DELTA);
+        assertEquals(listOfArray.extrapolateLeft(10), 164, DELTA);
+        assertEquals(listOfArray.extrapolateLeft(20), 344, DELTA);
     }
 
     @Test
     public void testExtrapolateRight() {
-        assertEquals(listOfArray.extrapolateRight(5),74.571,DELTA);
-        assertEquals(listOfArray.extrapolateRight(20),6,DELTA);
-        assertEquals(listOfArray.extrapolateRight(10),51.714, DELTA);
+        assertEquals(listOfArray.extrapolateRight(5), 74.571, DELTA);
+        assertEquals(listOfArray.extrapolateRight(20), 6, DELTA);
+        assertEquals(listOfArray.extrapolateRight(10), 51.714, DELTA);
     }
 
     @Test
     public void testInterpolate() {
-        assertEquals(listOfArray.interpolate(2.5,5),86,DELTA);
+        assertEquals(listOfArray.interpolate(2.5, 5), 86, DELTA);
     }
 
     @Test
     public void testAddNode() {
-       listOfArray.addNode(890,1703);
-       assertEquals(listOfArray.rightBound(),890,DELTA);
+        listOfArray.addNode(890, 1703);
+        assertEquals(listOfArray.rightBound(), 890, DELTA);
     }
 
     @Test
     public void testGetCount() {
-        assertEquals(listOfMathFunction.getCount(),60,DELTA);
-        assertEquals(listOfArray.getCount(),7,DELTA);
+        assertEquals(listOfMathFunction.getCount(), 60, DELTA);
+        assertEquals(listOfArray.getCount(), 7, DELTA);
     }
 }

@@ -1,6 +1,7 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
 public abstract class AbstractTabulatedFunction implements TabulatedFunction {
+    private int count;
 
     protected abstract int floorIndexOfX(double x);
 
