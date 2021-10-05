@@ -54,7 +54,7 @@ public class ArrayTabulatedFunctionTest {
     public static void testIndexOfX() {
         assertEquals(arrayTabulatedObjectTwo.indexOfX(1.1), -1, DELTA);
         for (int element = 0; element < 99; element++) {
-            assertEquals(arrayTabulatedObjectTwo.indexOfX(begin + element*0.91), element);
+            assertEquals(arrayTabulatedObjectTwo.indexOfX(begin + element * 0.91), element);
         }
     }
 
