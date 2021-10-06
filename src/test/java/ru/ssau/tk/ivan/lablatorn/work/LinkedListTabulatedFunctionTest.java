@@ -103,4 +103,6 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(listOfMathFunction.getCount(), 60, DELTA);
         assertEquals(listOfArray.getCount(), 7, DELTA);
     }
+
+
 }
