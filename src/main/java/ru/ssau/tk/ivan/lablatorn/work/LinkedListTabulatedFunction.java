@@ -4,22 +4,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private Node head; //голова списка
     private Node last; //последний узел
-    protected int count;
+    private int count;
 
-    protected static class Node {
-        double x;
-        double y;
-        Node next;
-        Node prev;
-    }
 
-    LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+    public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         for (int i = 0; i < xValues.length; i++) {
             this.addNode(xValues[i], yValues[i]);
         }
     }
 
-    LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+    public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
         double step = (xTo - xFrom) / (count - 1);
         for (int i = 0; i < count; i++) {
             this.addNode(xFrom, source.apply(xFrom));

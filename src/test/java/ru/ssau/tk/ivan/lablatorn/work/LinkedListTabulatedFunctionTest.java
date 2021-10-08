@@ -21,7 +21,7 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void testRightBound() {
         assertEquals(listOfArray.rightBound(), 20, DELTA);
-        assertEquals(listOfArray.rightBound(), 40, DELTA);
+        assertEquals(listOfMathFunction.rightBound(), 40, DELTA);
     }
 
     @Test
@@ -40,6 +40,7 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testSetY() {
+
         listOfArray.setY(3, 1703);
         assertEquals(listOfArray.getY(3), 1703, DELTA);
         listOfArray.setY(5, 2021);
@@ -68,7 +69,7 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(listOfArray.floorIndexOfX(5), 2, DELTA);
         assertEquals(listOfMathFunction.floorIndexOfX(100), 60, DELTA);
         assertEquals(listOfMathFunction.floorIndexOfX(21), 2, DELTA);
-        assertEquals(listOfArray.floorIndexOfX(22), 7, DELTA);
+        assertEquals(listOfArray.floorIndexOfX(22), 6, DELTA);
     }
 
 
