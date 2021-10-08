@@ -20,7 +20,7 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testRightBound() {
-        assertEquals(listOfArray.rightBound(), 20, DELTA);
+        assertEquals(listOfArray.rightBound(), 890, DELTA);
         assertEquals(listOfMathFunction.rightBound(), 40, DELTA);
     }
 
@@ -40,11 +40,12 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testSetY() {
-
-        listOfArray.setY(3, 1703);
-        assertEquals(listOfArray.getY(3), 1703, DELTA);
-        listOfArray.setY(5, 2021);
-        assertEquals(listOfArray.getY(5), 2021, DELTA);
+        double testValueY =  1703;
+        double testValueY1 = 2021;
+        listOfArray.setY(3, testValueY);
+        assertEquals(listOfArray.getY(3), testValueY, DELTA);
+        listOfArray.setY(5, testValueY1);
+        assertEquals(listOfArray.getY(5), testValueY1, DELTA);
     }
 
     @Test
@@ -83,9 +84,9 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testExtrapolateRight() {
-        assertEquals(listOfArray.extrapolateRight(5), 74.571, DELTA);
         assertEquals(listOfArray.extrapolateRight(20), 6, DELTA);
-        assertEquals(listOfArray.extrapolateRight(10), 51.714, DELTA);
+        assertEquals(listOfArray.extrapolateRight(2), -29.110, DELTA);
+        assertEquals(listOfArray.extrapolateRight(5), -23.258, DELTA);
     }
 
     @Test
@@ -102,7 +103,7 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void testGetCount() {
         assertEquals(listOfMathFunction.getCount(), 60, DELTA);
-        assertEquals(listOfArray.getCount(), 7, DELTA);
+        assertEquals(listOfArray.getCount(), 8, DELTA);
     }
 
 
