@@ -21,7 +21,8 @@ public class LinkedListTabulatedFunctionTest {
     LinkedListTabulatedFunction listOfArray = new LinkedListTabulatedFunction(xValues, yValues);
     LinkedListTabulatedFunction listOfArray2 = new LinkedListTabulatedFunction(xValues2, yValues2);
     LinkedListTabulatedFunction listOfMathFunction = new LinkedListTabulatedFunction(testFunction, 20, 40, 60);
-    LinkedListTabulatedFunction listOfMathFunction1 = new LinkedListTabulatedFunction(testFunction,10,40,20);
+    LinkedListTabulatedFunction listOfMathFunction1 = new LinkedListTabulatedFunction(testFunction, 10, 40, 20);
+
     @Test
     public void testLeftBound() {
         assertEquals(listOfArray.leftBound(), 1, DELTA);
@@ -50,7 +51,7 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testSetY() {
-        double testValueY =  1703;
+        double testValueY = 1703;
         double testValueY1 = 2021;
         listOfArray3.setY(3, testValueY);
         assertEquals(listOfArray3.getY(3), testValueY, DELTA);
