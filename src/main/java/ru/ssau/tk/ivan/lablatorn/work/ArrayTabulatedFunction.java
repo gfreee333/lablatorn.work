@@ -15,7 +15,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        double intervalSplittingStep = (xTo - xFrom) / count;
+        double step = (xTo - xFrom) / count;
         double[] xValues = new double[count];
         double[] yValues = new double[count];
         xValues[0] = xFrom;
@@ -23,7 +23,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         xValues[count - 1] = xTo;
         yValues[count - 1] = source.apply(xTo);
         for (int element = 1; element < count - 1; element++) {
-            xValues[element] = xValues[element - 1] + intervalSplittingStep;
+            xValues[element] = xValues[element - 1] + step;
             yValues[element] = source.apply(xValues[element]);
         }
         this.count = count;
