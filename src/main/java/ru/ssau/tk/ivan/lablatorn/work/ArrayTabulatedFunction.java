@@ -83,15 +83,19 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int floorIndexOfX(double x) {
-        if (x < xValues[0]) {
-            throw new IllegalArgumentException("X is less than the left border");
-        }
-        for (int i = 0; i + 1 < count; i++) {
-            if (xValues[i + 1] > x) {
-                return i;
+        double max = Double.MIN_VALUE;
+        for (int i = 0; i < count - 1; i++) {
+            if (xValues[i] == x) {
+               return i;
+            } else if (x > xValues[i] && xValues[i] > max) {
+                max = xValues[i];
             }
         }
-        return count;
+        if (max == Double.MIN_VALUE) {
+            return count;
+        } else {
+            return 0;
+        }
     }
 
     @Override
