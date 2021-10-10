@@ -11,10 +11,20 @@ public class ArrayTabulatedFunctionTest {
     static final double end = 93.9;
     private static double[] xValues = new double[]{3.4, 5.2, 6.0, 2.1};
     private static double[] yValues = new double[]{-2.4, 1.2, 3.0, 5.1};
+    private static double[] x1Values = new double[]{34, 5.2, 60, 2};
+    private static double[] y1Values = new double[]{-2.4, 1.2, 30, 5.1};
     static SqrFunction sqrObject = new SqrFunction();
     static ArrayTabulatedFunction arrayTabulatedObject = new ArrayTabulatedFunction(xValues, yValues);
+    static ArrayTabulatedFunction array1TabulatedObject = new ArrayTabulatedFunction(x1Values, y1Values);
     static ArrayTabulatedFunction arrayTabulatedObjectTwo = new ArrayTabulatedFunction(sqrObject, begin, end, 100);
 
+    @Test
+    public static void testSetY(){
+        array1TabulatedObject.setY(2,1000);
+        assertEquals(array1TabulatedObject.getY(2),1000,0.001);
+        array1TabulatedObject.setY(2,2222);
+        assertEquals(array1TabulatedObject.getY(2),2222,0.001);
+    }
     @Test
     public static void testArrayTabulatedFunctionWithTwoParameters() {
         assertEquals(arrayTabulatedObject.getCount(), 4);
