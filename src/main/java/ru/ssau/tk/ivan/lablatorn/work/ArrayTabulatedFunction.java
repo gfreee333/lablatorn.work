@@ -92,9 +92,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
             }
         }
         if (max == Double.MIN_VALUE) {
-            return count;
-        } else {
             return 0;
+        } else {
+            return count;
         }
     }
 
