@@ -83,17 +83,26 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int floorIndexOfX(double x) {
+        int element = -1;
+        boolean xi = false;
         double max = Double.MIN_VALUE;
         for (int i = 0; i < count - 1; i++) {
             if (xValues[i] == x) {
                return i;
             } else if (x > xValues[i] && xValues[i] > max) {
                 max = xValues[i];
+                element = i;
+            }
+            if (x < xValues[i] ) {
+                xi = true;
             }
         }
         if (max == Double.MIN_VALUE) {
             return 0;
-        } else {
+        } else if (xi){
+            return element;
+        }
+        else {
             return count;
         }
     }
