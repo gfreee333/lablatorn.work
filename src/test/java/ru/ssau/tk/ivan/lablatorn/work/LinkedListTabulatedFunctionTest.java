@@ -8,21 +8,20 @@ public class LinkedListTabulatedFunctionTest {
 
     private final double[] xValues = new double[]{1, 2, 3, 5, 10, 6, 20};
     private final double[] yValues = new double[]{2, 20, 50, 40, 60, 70, 6};
-    private final double[] xValues1 = new double[]{100, 200, 300, 500, 1000, 600, 500};
-    private final double[] yValues1 = new double[]{25, 20, 50, 40, 10, 70, 40};
-    private final double[] xValues2 = new double[]{100, 200, 300, 500, 1000, 600, 500};
-    private final double[] yValues2 = new double[]{25, 20, 50, 40, 10, 70, 40};
-    private final double[] xValues3 = new double[]{100, 200, 300, 500, 1000, 600, 500};
-    private final double[] yValues3 = new double[]{25, 20, 50, 40, 10, 70, 40};
+    private final double[] xValuesOne = new double[]{100, 200, 300, 500, 1000, 600, 500};
+    private final double[] yValuesOne = new double[]{25, 20, 50, 40, 10, 70, 40};
+    private final double[] xValuesTwo = new double[]{100, 200, 300, 500, 1000, 600, 500};
+    private final double[] yValuesTwo = new double[]{25, 20, 50, 40, 10, 70, 40};
+    private final double[] xValuesThree = new double[]{100, 200, 300, 500, 1000, 600, 500};
+    private final double[] yValuesThree = new double[]{25, 20, 50, 40, 10, 70, 40};
 
     private final double DELTA = 0.001;
     private final MathFunction testFunction = new TangFunction();
-    LinkedListTabulatedFunction listOfArray3 = new LinkedListTabulatedFunction(xValues3, yValues3);
-    LinkedListTabulatedFunction listOfArray1 = new LinkedListTabulatedFunction(xValues1, yValues1);
+    LinkedListTabulatedFunction listOfArrayThree = new LinkedListTabulatedFunction(xValuesThree, yValuesThree);
+    LinkedListTabulatedFunction listOfArrayOne = new LinkedListTabulatedFunction(xValuesOne, yValuesOne);
     LinkedListTabulatedFunction listOfArray = new LinkedListTabulatedFunction(xValues, yValues);
-    LinkedListTabulatedFunction listOfArray2 = new LinkedListTabulatedFunction(xValues2, yValues2);
+    LinkedListTabulatedFunction listOfArrayTwo = new LinkedListTabulatedFunction(xValuesTwo, yValuesTwo);
     LinkedListTabulatedFunction listOfMathFunction = new LinkedListTabulatedFunction(testFunction, 20, 40, 60);
-    LinkedListTabulatedFunction listOfMathFunction1 = new LinkedListTabulatedFunction(testFunction, 10, 40, 20);
 
     @Test
     public void testLeftBound() {
@@ -32,7 +31,7 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testRightBound() {
-        assertEquals(listOfArray1.rightBound(), 500, DELTA);
+        assertEquals(listOfArrayOne.rightBound(), 500, DELTA);
         assertEquals(listOfMathFunction.rightBound(), 40, DELTA);
     }
 
@@ -54,10 +53,10 @@ public class LinkedListTabulatedFunctionTest {
     public void testSetY() {
         double testValueY = 1703;
         double testValueY1 = 2021;
-        listOfArray3.setY(3, testValueY);
-        assertEquals(listOfArray3.getY(3), testValueY, DELTA);
-        listOfArray3.setY(5, testValueY1);
-        assertEquals(listOfArray3.getY(5), testValueY1, DELTA);
+        listOfArrayThree.setY(3, testValueY);
+        assertEquals(listOfArrayThree.getY(3), testValueY, DELTA);
+        listOfArrayThree.setY(5, testValueY1);
+        assertEquals(listOfArrayThree.getY(5), testValueY1, DELTA);
     }
 
     @Test
@@ -87,17 +86,17 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testExtrapolateLeft() {
-        assertEquals(listOfArray2.extrapolateLeft(500), 5, DELTA);
-        assertEquals(listOfArray2.extrapolateLeft(200), 20, DELTA);
-        assertEquals(listOfArray2.extrapolateLeft(250), 17.5, DELTA);
-        assertEquals(listOfArray2.extrapolateLeft(750), -7.5, DELTA);
+        assertEquals(listOfArrayTwo.extrapolateLeft(500), 5, DELTA);
+        assertEquals(listOfArrayTwo.extrapolateLeft(200), 20, DELTA);
+        assertEquals(listOfArrayTwo.extrapolateLeft(250), 17.5, DELTA);
+        assertEquals(listOfArrayTwo.extrapolateLeft(750), -7.5, DELTA);
     }
 
     @Test
     public void testExtrapolateRight() {
-        assertEquals(listOfArray2.extrapolateRight(1000), 190, DELTA);
-        assertEquals(listOfArray2.extrapolateRight(750), 115.0, DELTA);
-        assertEquals(listOfArray2.extrapolateRight(500), 40.0, DELTA);
+        assertEquals(listOfArrayTwo.extrapolateRight(1000), 190, DELTA);
+        assertEquals(listOfArrayTwo.extrapolateRight(750), 115.0, DELTA);
+        assertEquals(listOfArrayTwo.extrapolateRight(500), 40.0, DELTA);
     }
 
     @Test
@@ -114,7 +113,7 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void testGetCount() {
         assertEquals(listOfMathFunction.getCount(), 60, DELTA);
-        assertEquals(listOfArray1.getCount(), 7, DELTA);
+        assertEquals(listOfArrayOne.getCount(), 7, DELTA);
     }
 
     @Test

@@ -7,8 +7,8 @@ import static org.testng.Assert.*;
 public class ArrayTabulatedFunctionTest {
 
     static final double DELTA = 0.0001;
-    static final double begin = 1;
-    static final double end = 101;
+    static final double BEGIN = 1;
+    static final double END = 101;
     private static double[] xValues = new double[]{3.4, 5.2, 6.0, 2.1};
     private static double[] yValues = new double[]{-2.4, 1.2, 3.0, 5.1};
     private static double[] x1Values = new double[]{34, 5.2, 60, 2};
@@ -16,7 +16,7 @@ public class ArrayTabulatedFunctionTest {
     static SqrFunction sqrObject = new SqrFunction();
     static ArrayTabulatedFunction arrayTabulatedObject = new ArrayTabulatedFunction(xValues, yValues);
     static ArrayTabulatedFunction array1TabulatedObject = new ArrayTabulatedFunction(x1Values, y1Values);
-    static ArrayTabulatedFunction arrayTabulatedObjectTwo = new ArrayTabulatedFunction(sqrObject, begin, end, 100);
+    static ArrayTabulatedFunction arrayTabulatedObjectTwo = new ArrayTabulatedFunction(sqrObject, BEGIN, END, 100);
 
 
     @Test
@@ -41,7 +41,7 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public static void testGetX() {
         for (int element = 0; element < 99; element++) {
-            assertEquals(arrayTabulatedObjectTwo.getX(element), element * (end - begin) / 100.0 + begin, DELTA);
+            assertEquals(arrayTabulatedObjectTwo.getX(element), element * (END - BEGIN) / 100.0 + BEGIN, DELTA);
         }
     }
 
@@ -54,12 +54,12 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public static void testLeftBound() {
-        assertEquals(arrayTabulatedObjectTwo.leftBound(), begin, DELTA);
+        assertEquals(arrayTabulatedObjectTwo.leftBound(), BEGIN, DELTA);
     }
 
     @Test
     public static void testRightBound() {
-        assertEquals(arrayTabulatedObjectTwo.rightBound(), end, DELTA);
+        assertEquals(arrayTabulatedObjectTwo.rightBound(), END, DELTA);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedObjectTwo.indexOfX(30.6), -1, DELTA);
         assertEquals(arrayTabulatedObjectTwo.indexOfX(5), 4, DELTA);
         for (int element = 0; element < 99; ++element) {
-            assertEquals(arrayTabulatedObjectTwo.indexOfX(1 + element * (end - begin) / 100.0), element);
+            assertEquals(arrayTabulatedObjectTwo.indexOfX(1 + element * (END- BEGIN) / 100.0), element);
         }
     }
 
@@ -82,7 +82,7 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public static void testFloorIndexOfX() {
         for (int element = 0; element < 99; element++) {
-            assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(begin + element * (end - begin) / 100.0), element, DELTA);
+            assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(BEGIN + element * (END - BEGIN) / 100.0), element, DELTA);
         }
         assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(0.1), 0);
         assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(102.0), 100);
