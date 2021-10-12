@@ -6,9 +6,9 @@ import static org.testng.Assert.*;
 
 public class ArrayTabulatedFunctionTest {
 
-    static final double DELTA = 0.0001;
-    static final double BEGIN = 1;
-    static final double END = 101;
+    private final double DELTA = 0.0001;
+    private final double BEGIN = 1;
+    private final double END = 101;
     private final double[] xValues = new double[]{3.4, 5.2, 6.0, 2.1};
     private final double[] yValues = new double[]{-2.4, 1.2, 3.0, 5.1};
     private final double[] xValuesOne = new double[]{34, 5.2, 60, 2};
