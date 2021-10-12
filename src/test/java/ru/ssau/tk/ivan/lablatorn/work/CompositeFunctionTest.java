@@ -6,11 +6,7 @@ import static org.testng.Assert.*;
 
 public class CompositeFunctionTest {
     public final static double DELTA = 0.0001;
-    private final MathFunction identity = new IdentityFunction();
-    private final MathFunction root = new ThreeRootFunction();
-    private final MathFunction identityRoot = new CompositeFunction(identity, root);
-    private final MathFunction rootIdentity = new CompositeFunction(root, identity);
-
+    
     private final double[] xValues = new double[]{1, 2, 3, 4, 5};
     private final double[] yValues = new double[]{10, 20, 30, 40, 50};
 
