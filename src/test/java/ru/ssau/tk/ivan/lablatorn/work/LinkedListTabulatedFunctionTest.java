@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class LinkedListTabulatedFunctionTest {
+
     private final double[] xValues = new double[]{1, 2, 3, 5, 10, 6, 20};
     private final double[] yValues = new double[]{2, 20, 50, 40, 60, 70, 6};
     private final double[] xValues1 = new double[]{100, 200, 300, 500, 1000, 600, 500};
@@ -116,5 +117,12 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(listOfArray1.getCount(), 7, DELTA);
     }
 
+    @Test
+    public void testApply() {
+        assertEquals(listOfMathFunction.apply(15), -145.636, DELTA);
+        assertEquals(listOfMathFunction.apply(40), -1.1172, DELTA);
+        assertEquals(listOfMathFunction.apply(30), 32.7061, DELTA);
+        assertEquals(listOfMathFunction.apply(60), 76.048, DELTA);
+    }
 
 }
