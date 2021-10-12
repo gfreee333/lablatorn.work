@@ -88,21 +88,20 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         double max = Double.MIN_VALUE;
         for (int i = 0; i < count - 1; i++) {
             if (xValues[i] == x) {
-               return i;
+                return i;
             } else if (x > xValues[i] && xValues[i] > max) {
                 max = xValues[i];
                 element = i;
             }
-            if (x < xValues[i] ) {
+            if (x < xValues[i]) {
                 xi = true;
             }
         }
         if (max == Double.MIN_VALUE) {
             return 0;
-        } else if (xi){
+        } else if (xi) {
             return element;
-        }
-        else {
+        } else {
             return count;
         }
     }

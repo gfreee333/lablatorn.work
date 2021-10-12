@@ -20,12 +20,13 @@ public class ArrayTabulatedFunctionTest {
 
 
     @Test
-    public static void testSetY(){
-        array1TabulatedObject.setY(2,1000);
-        assertEquals(array1TabulatedObject.getY(2),1000,0.001);
-        array1TabulatedObject.setY(2,2222);
-        assertEquals(array1TabulatedObject.getY(2),2222,0.001);
+    public static void testSetY() {
+        array1TabulatedObject.setY(2, 1000);
+        assertEquals(array1TabulatedObject.getY(2), 1000, 0.001);
+        array1TabulatedObject.setY(2, 2222);
+        assertEquals(array1TabulatedObject.getY(2), 2222, 0.001);
     }
+
     @Test
     public static void testArrayTabulatedFunctionWithTwoParameters() {
         assertEquals(arrayTabulatedObject.getCount(), 4);
