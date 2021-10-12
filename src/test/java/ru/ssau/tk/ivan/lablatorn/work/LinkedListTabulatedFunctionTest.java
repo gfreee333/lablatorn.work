@@ -17,11 +17,11 @@ public class LinkedListTabulatedFunctionTest {
 
     private final double DELTA = 0.001;
     private final MathFunction testFunction = new TangFunction();
-    LinkedListTabulatedFunction listOfArrayThree = new LinkedListTabulatedFunction(xValuesThree, yValuesThree);
-    LinkedListTabulatedFunction listOfArrayOne = new LinkedListTabulatedFunction(xValuesOne, yValuesOne);
-    LinkedListTabulatedFunction listOfArray = new LinkedListTabulatedFunction(xValues, yValues);
-    LinkedListTabulatedFunction listOfArrayTwo = new LinkedListTabulatedFunction(xValuesTwo, yValuesTwo);
-    LinkedListTabulatedFunction listOfMathFunction = new LinkedListTabulatedFunction(testFunction, 20, 40, 60);
+    private final LinkedListTabulatedFunction listOfArrayThree = new LinkedListTabulatedFunction(xValuesThree, yValuesThree);
+    private final LinkedListTabulatedFunction listOfArrayOne = new LinkedListTabulatedFunction(xValuesOne, yValuesOne);
+    private final LinkedListTabulatedFunction listOfArray = new LinkedListTabulatedFunction(xValues, yValues);
+    private final LinkedListTabulatedFunction listOfArrayTwo = new LinkedListTabulatedFunction(xValuesTwo, yValuesTwo);
+    private final LinkedListTabulatedFunction listOfMathFunction = new LinkedListTabulatedFunction(testFunction, 20, 40, 60);
 
     @Test
     public void testLeftBound() {
