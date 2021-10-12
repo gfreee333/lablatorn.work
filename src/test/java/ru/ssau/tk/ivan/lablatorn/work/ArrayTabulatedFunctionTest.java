@@ -18,10 +18,6 @@ public class ArrayTabulatedFunctionTest {
     static ArrayTabulatedFunction array1TabulatedObject = new ArrayTabulatedFunction(x1Values, y1Values);
     static ArrayTabulatedFunction arrayTabulatedObjectTwo = new ArrayTabulatedFunction(sqrObject, begin, end, 100);
 
-    /*@Test
-    public static void justTest() {
-        assertEquals(arrayTabulatedObjectTwo.getX(5), 23);
-    }*/
 
     @Test
     public static void testSetY(){
@@ -67,7 +63,7 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public static void testIndexOfX() {
-        assertEquals(arrayTabulatedObjectTwo.indexOfX(0.1), -1, DELTA);
+        assertEquals(arrayTabulatedObjectTwo.indexOfX(30.6), -1, DELTA);
         assertEquals(arrayTabulatedObjectTwo.indexOfX(5), 4, DELTA);
         for (int element = 0; element < 99; ++element) {
             assertEquals(arrayTabulatedObjectTwo.indexOfX(1 + element * (end - begin) / 100.0), element);
@@ -89,6 +85,7 @@ public class ArrayTabulatedFunctionTest {
         }
         assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(0.1), 0);
         assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(102.0), 100);
+        assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(30.6), 29);
     }
 
     @Test
@@ -103,6 +100,14 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedObjectTwo.extrapolateRight(100), 10001.0, DELTA);
         assertEquals(arrayTabulatedObjectTwo.extrapolateRight(120), 14001.0, DELTA);
         assertEquals(arrayTabulatedObjectTwo.extrapolateRight(Double.POSITIVE_INFINITY), Double.POSITIVE_INFINITY);
+    }
+
+    @Test
+    public static void testApply() {
+        assertEquals(arrayTabulatedObjectTwo.apply(0.6), -0.2000, DELTA);
+        assertEquals(arrayTabulatedObjectTwo.apply(110), 12001.0, DELTA);
+        assertEquals(arrayTabulatedObjectTwo.apply(50), 2500.0, DELTA);
+        assertEquals(arrayTabulatedObjectTwo.apply(30.6), 901.22, DELTA);
     }
 }
 
