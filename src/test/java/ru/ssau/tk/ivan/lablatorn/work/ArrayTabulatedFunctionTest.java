@@ -3,6 +3,7 @@ package ru.ssau.tk.ivan.lablatorn.work;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class ArrayTabulatedFunctionTest {
 
@@ -13,10 +14,14 @@ public class ArrayTabulatedFunctionTest {
     private final double[] yValues = new double[]{-2.4, 1.2, 3.0, 5.1};
     private final double[] xValuesOne = new double[]{34, 5.2, 60, 2};
     private final double[] yValuesOne = new double[]{-2.4, 1.2, 30, 5.1};
+    private final double[] xValuesThree = new double[]{3.0};
+    private final double[] yValuesThree = new double[]{4.0};
+
     private final SqrFunction sqrObject = new SqrFunction();
     private final ArrayTabulatedFunction arrayTabulatedObject = new ArrayTabulatedFunction(xValues, yValues);
     private final ArrayTabulatedFunction arrayTabulatedObjectOne = new ArrayTabulatedFunction(xValuesOne, yValuesOne);
     private final ArrayTabulatedFunction arrayTabulatedObjectTwo = new ArrayTabulatedFunction(sqrObject, BEGIN, END, 100);
+    private final ArrayTabulatedFunction arrayTabulatedObjectWithOneElement = new ArrayTabulatedFunction(xValuesThree, yValuesThree);
 
 
     @Test
@@ -34,7 +39,10 @@ public class ArrayTabulatedFunctionTest {
     }
 
     @Test
-    public void testGetCount() { assertEquals(arrayTabulatedObjectTwo.getCount(), 100);}
+    public void testGetCount() {
+        assertEquals(arrayTabulatedObjectTwo.getCount(), 100);
+        assertEquals(arrayTabulatedObjectWithOneElement.getCount(), 1);
+    }
 
     @Test
     public void testGetX() {
@@ -53,11 +61,13 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public void testLeftBound() {
         assertEquals(arrayTabulatedObjectTwo.leftBound(), BEGIN, DELTA);
+        assertEquals(arrayTabulatedObjectWithOneElement.leftBound(), 3.0, DELTA);
     }
 
     @Test
     public void testRightBound() {
         assertEquals(arrayTabulatedObjectTwo.rightBound(), END, DELTA);
+        assertEquals(arrayTabulatedObjectWithOneElement.rightBound(), 3.0, DELTA);
     }
 
     @Test
@@ -67,6 +77,7 @@ public class ArrayTabulatedFunctionTest {
         for (int element = 0; element < 99; ++element) {
             assertEquals(arrayTabulatedObjectTwo.indexOfX(1 + element * (END - BEGIN) / 100.0), element);
         }
+        assertEquals(arrayTabulatedObjectWithOneElement.indexOfX(3.0), 0, DELTA);
     }
 
     @Test
@@ -75,6 +86,7 @@ public class ArrayTabulatedFunctionTest {
         for (int element = 0; element < 99; element++) {
             assertEquals(arrayTabulatedObjectTwo.indexOfY(sqrObject.apply(arrayTabulatedObjectTwo.getX(element))), element);
         }
+        assertEquals(arrayTabulatedObjectWithOneElement.indexOfY(4.0), 0);
     }
 
     @Test
@@ -85,6 +97,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(0.1), 0);
         assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(102.0), 100);
         assertEquals(arrayTabulatedObjectTwo.floorIndexOfX(30.6), 29);
+        assertEquals(arrayTabulatedObjectWithOneElement.floorIndexOfX(3.0), 0);
     }
 
     @Test
@@ -92,6 +105,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedObjectTwo.extrapolateLeft(0.1), -1.7000, DELTA);
         assertEquals(arrayTabulatedObjectTwo.extrapolateLeft(0.9), 0.70000, DELTA);
         assertEquals(arrayTabulatedObjectTwo.extrapolateLeft(Double.NEGATIVE_INFINITY), Double.NEGATIVE_INFINITY);
+        assertEquals(arrayTabulatedObjectWithOneElement.extrapolateLeft(0.1), 4.0, DELTA);
     }
 
     @Test
@@ -99,6 +113,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedObjectTwo.extrapolateRight(100), 10001.0, DELTA);
         assertEquals(arrayTabulatedObjectTwo.extrapolateRight(120), 14001.0, DELTA);
         assertEquals(arrayTabulatedObjectTwo.extrapolateRight(Double.POSITIVE_INFINITY), Double.POSITIVE_INFINITY);
+        assertEquals(arrayTabulatedObjectWithOneElement.extrapolateRight(4.0), 4.0, DELTA);
     }
 
     @Test
@@ -106,7 +121,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(arrayTabulatedObjectTwo.apply(0.6), -0.2000, DELTA);
         assertEquals(arrayTabulatedObjectTwo.apply(110), 12001.0, DELTA);
         assertEquals(arrayTabulatedObjectTwo.apply(50), 2500.0, DELTA);
-        assertEquals(arrayTabulatedObjectTwo.apply(30.6), 901.22, DELTA);
+        assertEquals(arrayTabulatedObjectTwo.apply(30.6), 936.6, DELTA);
     }
 }
 
