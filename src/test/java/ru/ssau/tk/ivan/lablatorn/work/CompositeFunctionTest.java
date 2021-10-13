@@ -5,8 +5,8 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class CompositeFunctionTest {
-    public final static double DELTA = 0.0001;
-    
+    private final static double DELTA = 0.0001;
+
     private final double[] xValues = new double[]{1, 2, 3, 4, 5};
     private final double[] yValues = new double[]{10, 20, 30, 40, 50};
 
