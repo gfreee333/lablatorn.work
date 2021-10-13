@@ -34,9 +34,7 @@ public class ArrayTabulatedFunctionTest {
     }
 
     @Test
-    public void testGetCount() {
-        assertEquals(arrayTabulatedObjectTwo.getCount(), 100);
-    }
+    public void testGetCount() { assertEquals(arrayTabulatedObjectTwo.getCount(), 100);}
 
     @Test
     public void testGetX() {
