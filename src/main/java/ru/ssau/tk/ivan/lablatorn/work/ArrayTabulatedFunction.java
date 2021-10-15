@@ -86,7 +86,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         if (indexOfX(x) != -1) {
             return indexOfX(x);
         }
-        for (int element = 0; element < this.count; element++) {
+        for (int element = 0; element < count; element++) {
             if (x < xValues[element] && element != 0) {
                 return element - 1;
             }
@@ -94,12 +94,12 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
                 return 0;
             }
         }
-        return this.count;
+        return count;
     }
 
     @Override
     public double extrapolateLeft(double x) {
-        if (count == 1 || yValues[0] == yValues[1]) {
+        if (count == 1) {
             return yValues[0];
         }
         return interpolate(x, 0);
@@ -107,8 +107,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double extrapolateRight(double x) {
-        if (count == 1 || yValues[count - 1] == yValues[count - 2]) {
-            return yValues[count - 1];
+        if (count == 1) {
+            return yValues[0];
         }
         return interpolate(x, count - 2);
     }
@@ -117,8 +117,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     public double interpolate(double x, int floorIndex) {
         if (count == 1) {
             return yValues[0];
-        } else if (yValues[floorIndex] == yValues[floorIndex + 1]){
-            return yValues[floorIndex];
         }
         return super.interpolate(x, xValues[floorIndex], xValues[floorIndex + 1],
                 yValues[floorIndex], yValues[floorIndex + 1]);
