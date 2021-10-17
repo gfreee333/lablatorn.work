@@ -15,7 +15,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        double step = (xTo - xFrom) / count;
+        double step = (xTo - xFrom) / (count - 1);
         double[] xValues = new double[count];
         double[] yValues = new double[count];
         xValues[0] = xFrom;
@@ -83,27 +83,18 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int floorIndexOfX(double x) {
-        int element = -1;
-        boolean xi = false;
-        double max = Double.MIN_VALUE;
-        for (int i = 0; i < count - 1; i++) {
-            if (xValues[i] == x) {
-                return i;
-            } else if (x > xValues[i] && xValues[i] > max) {
-                max = xValues[i];
-                element = i;
+        if (indexOfX(x) != -1) {
+            return indexOfX(x);
+        }
+        for (int element = 0; element < count; element++) {
+            if (x < xValues[element] && element != 0) {
+                return element - 1;
             }
-            if (x < xValues[i]) {
-                xi = true;
+            if (x < xValues[element]) {
+                return 0;
             }
         }
-        if (max == Double.MIN_VALUE) {
-            return 0;
-        } else if (xi) {
-            return element;
-        } else {
-            return count;
-        }
+        return count;
     }
 
     @Override
@@ -127,7 +118,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         if (count == 1) {
             return yValues[0];
         }
-        return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1],
+        return super.interpolate(x, xValues[floorIndex], xValues[floorIndex + 1],
                 yValues[floorIndex], yValues[floorIndex + 1]);
     }
 }

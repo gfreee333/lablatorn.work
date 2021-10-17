@@ -8,7 +8,7 @@ public class ArrayTabulatedFunctionTest {
 
     private final double DELTA = 0.0001;
     private final double BEGIN = 1;
-    private final double END = 101;
+    private final double END = 100;
     private final double[] xValues = new double[]{3.4, 5.2, 6.0, 2.1};
     private final double[] yValues = new double[]{-2.4, 1.2, 3.0, 5.1};
 
@@ -26,7 +26,7 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testSetY() {
-        ArrayTabulatedFunction array = createFromArray();
+        TabulatedFunction array = createFromArray();
         array.setY(2, 1000);
         assertEquals(array.getY(2), 1000, DELTA);
         array.setY(2, 2222);
@@ -35,31 +35,31 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testArrayTabulatedFunctionWithTwoParameters() {
-        ArrayTabulatedFunction array = createFromArray();
-        ArrayTabulatedFunction firstFunction = firstFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = firstFunction();
         assertEquals(array.getCount(), 4);
         assertEquals(firstFunction.getCount(), 100);
     }
 
     @Test
     public void testGetCount() {
-        ArrayTabulatedFunction array = createFromArray();
-        ArrayTabulatedFunction firstFunction = firstFunction();
+        TabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = firstFunction();
         assertEquals(firstFunction.getCount(), 100);
         assertEquals(array.getCount(), 4);
     }
 
     @Test
     public void testGetX() {
-        ArrayTabulatedFunction firstFunction = firstFunction();
-        for (int element = 0; element < 99; element++) {
-            assertEquals(firstFunction.getX(element), element * (END - BEGIN) / 100.0 + BEGIN, DELTA);
+        TabulatedFunction firstFunction = firstFunction();
+        for (int element = 0; element < 100; element++) {
+            assertEquals(firstFunction.getX(element), element * (END - BEGIN) / 99.0 + BEGIN, DELTA);
         }
     }
 
     @Test
     public void testGetY() {
-        ArrayTabulatedFunction firstFunction = firstFunction();
+        TabulatedFunction firstFunction = firstFunction();
         for (int element = 0; element < 99; element++) {
             assertEquals(firstFunction.getY(element), sqr.apply(firstFunction.getX(element)), DELTA);
         }
@@ -67,36 +67,36 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testLeftBound() {
-        ArrayTabulatedFunction firstFunction = firstFunction();
-        ArrayTabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = firstFunction();
+        TabulatedFunction array = createFromArray();
         assertEquals(firstFunction.leftBound(), BEGIN, DELTA);
         assertEquals(array.leftBound(), 3.4, DELTA);
     }
 
     @Test
     public void testRightBound() {
-        ArrayTabulatedFunction firstFunction = firstFunction();
-        ArrayTabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = firstFunction();
+        TabulatedFunction array = createFromArray();
         assertEquals(firstFunction.rightBound(), END, DELTA);
         assertEquals(array.rightBound(), 2.1, DELTA);
     }
 
     @Test
     public void testIndexOfX() {
-        ArrayTabulatedFunction firstFunction = firstFunction();
-        ArrayTabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = firstFunction();
+        TabulatedFunction array = createFromArray();
         assertEquals(firstFunction.indexOfX(30.6), -1, DELTA);
         assertEquals(firstFunction.indexOfX(5), 4, DELTA);
-        for (int element = 0; element < 99; ++element) {
-            assertEquals(firstFunction.indexOfX(1 + element * (END - BEGIN) / 100.0), element);
+        for (int element = 0; element < 100; ++element) {
+            assertEquals(firstFunction.indexOfX(1 + element * (END - BEGIN) / 99.0), element);
         }
         assertEquals(array.indexOfX(3), -1, DELTA);
     }
 
     @Test
     public void testIndexOfY() {
-        ArrayTabulatedFunction firstFunction = firstFunction();
-        ArrayTabulatedFunction array = createFromArray();
+        TabulatedFunction firstFunction = firstFunction();
+        TabulatedFunction array = createFromArray();
         assertEquals(firstFunction.indexOfY(0.432), -1, DELTA);
         for (int element = 0; element < 99; element++) {
             assertEquals(firstFunction.indexOfY(sqr.apply(firstFunction.getX(element))), element);
@@ -106,10 +106,10 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testFloorIndexOfX() {
-        ArrayTabulatedFunction firstFunction = firstFunction();
+        AbstractTabulatedFunction firstFunction = firstFunction();
         ArrayTabulatedFunction array = createFromArray();
-        for (int element = 0; element < 99; element++) {
-            assertEquals(firstFunction.floorIndexOfX(BEGIN + element * (END - BEGIN) / 100.0), element, DELTA);
+        for (int element = 0; element < 100; element++) {
+            assertEquals(firstFunction.floorIndexOfX(BEGIN + element * (END - BEGIN) / 99.0), element, DELTA);
         }
         assertEquals(firstFunction.floorIndexOfX(0.1), 0);
         assertEquals(firstFunction.floorIndexOfX(102.0), 100);
@@ -119,8 +119,8 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testExtrapolateLeft() {
-        ArrayTabulatedFunction firstFunction = firstFunction();
-        ArrayTabulatedFunction array = createFromArray();
+        AbstractTabulatedFunction firstFunction = firstFunction();
+        AbstractTabulatedFunction array = createFromArray();
         assertEquals(firstFunction.extrapolateLeft(0.1), -1.7000, DELTA);
         assertEquals(firstFunction.extrapolateLeft(0.9), 0.70000, DELTA);
         assertEquals(firstFunction.extrapolateLeft(Double.NEGATIVE_INFINITY), Double.NEGATIVE_INFINITY);
@@ -129,19 +129,19 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testExtrapolateRight() {
-        ArrayTabulatedFunction firstFunction = firstFunction();
-        ArrayTabulatedFunction array = createFromArray();
-        assertEquals(firstFunction.extrapolateRight(100), 10001.0, DELTA);
-        assertEquals(firstFunction.extrapolateRight(120), 14001.0, DELTA);
+        AbstractTabulatedFunction firstFunction = firstFunction();
+        AbstractTabulatedFunction array = createFromArray();
+        assertEquals(firstFunction.extrapolateRight(150), 19950.0, DELTA);
+        assertEquals(firstFunction.extrapolateRight(120), 13980.0, DELTA);
         assertEquals(firstFunction.extrapolateRight(Double.POSITIVE_INFINITY), Double.POSITIVE_INFINITY);
         assertEquals(array.extrapolateRight(4.0), 4.0769, DELTA);
     }
 
     @Test
     public void testApply() {
-        ArrayTabulatedFunction firstFunction = firstFunction();
+        TabulatedFunction firstFunction = firstFunction();
         assertEquals(firstFunction.apply(0.6), -0.2000, DELTA);
-        assertEquals(firstFunction.apply(110), 12001.0, DELTA);
+        assertEquals(firstFunction.apply(110), 11990.0, DELTA);
         assertEquals(firstFunction.apply(50), 2500.0, DELTA);
         assertEquals(firstFunction.apply(30.6), 936.6, DELTA);
     }
