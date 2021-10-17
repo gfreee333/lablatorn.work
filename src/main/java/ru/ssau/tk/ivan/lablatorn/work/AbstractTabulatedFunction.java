@@ -13,7 +13,7 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
     protected double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
         return leftY + (rightY - leftY) * (x - leftX) / (rightX - leftX);
     }
-
+    // some comments for smth update
     @Override
     public double apply(double x) {
         if (x < leftBound()) {
