@@ -5,6 +5,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head; //голова списка
     private int count;
 
+    public class Node {
+        double x;
+        double y;
+        Node next;
+        Node prev;
+    }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         for (int i = 0; i < xValues.length; i++) {
