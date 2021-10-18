@@ -4,6 +4,7 @@ import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
 import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction  {
 
@@ -54,7 +55,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction  {
         }
     }
 
-    @Override
+
     public Iterator<Point> iterator() {
         throw new UnsupportedOperationException();
     }

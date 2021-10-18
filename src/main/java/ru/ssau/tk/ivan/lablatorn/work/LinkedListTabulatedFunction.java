@@ -3,6 +3,8 @@ package ru.ssau.tk.ivan.lablatorn.work;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
 import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 
+import java.util.Iterator;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction  {
 
     private Node head; //голова списка
