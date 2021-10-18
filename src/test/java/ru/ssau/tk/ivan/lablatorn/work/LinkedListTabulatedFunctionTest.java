@@ -1,6 +1,9 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.ivan.lablatorn.work.function.Point;
+
+import java.util.Iterator;
 
 import static org.testng.Assert.*;
 
@@ -29,6 +32,7 @@ public class LinkedListTabulatedFunctionTest {
     private TabulatedFunction secondFunction() {
         return new LinkedListTabulatedFunction(unit, 10, 40, 60);
     }
+
 
     @Test
     public void testLeftBound() {
@@ -168,6 +172,40 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(test.apply(1), -15.099, DELTA);
         assertEquals(firstFunction.apply(30), 900.0, DELTA);
         assertEquals(secondFunction.apply(60), 1.0, DELTA);
+    }
+
+
+    @Test
+    public void testIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> createFromList().getX(-200));
+        assertThrows(IllegalArgumentException.class, () -> createFromList().getY(-100));
+        assertThrows(IllegalArgumentException.class, () -> createFromList().getX(-20));
+        assertThrows(IllegalArgumentException.class, () -> createFromList().getY(-1));
+    }
+
+    @Test
+    public void testIteratorForEach() {
+        TabulatedFunction tabulatedFunction = testFunction();
+        int i = 0;
+        int j = 0;
+        for (Point point : tabulatedFunction) {
+            assertEquals(point.x, tabulatedFunction.getX(i++), DELTA);
+            assertEquals(point.y, tabulatedFunction.getY(j++), DELTA);
+        }
+    }
+
+    @Test
+    public void testIteratorWhile() {
+        TabulatedFunction array = createFromList();
+        Iterator<Point> arrayIterator = array.iterator();
+
+        int i = 0;
+        int j = 0;
+        while (arrayIterator.hasNext()) {
+            Point point = arrayIterator.next();
+            assertEquals(array.getX(i++), point.x);
+            assertEquals(array.getY(j++), point.y);
+        }
     }
 
 }
