@@ -3,10 +3,14 @@ package ru.ssau.tk.ivan.lablatorn.work;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
 import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private Node head; //голова списка
     private int count;
+
 
     public class Node {
         double x;
@@ -65,19 +69,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         head.prev = newNode;
         count++;
     }
-
-    @Override
-    public Iterator<Point> iterator() {
-        return new Iterator<Point>() {
-            Node node = head ;
-
-            @Override
-            public Iterator<Point> iterator() {
-                return null;
-            }
-        };
-    }
-
 
     @Override
     public double leftBound() {
@@ -158,6 +149,32 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public int getCount() {
         return count;
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        return new Iterator<Point>() {
+            Node node = head;
+
+            @Override
+            public boolean hasNext() {
+                return node != null;
+            }
+
+            @Override
+            public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                Point point = new Point(node.x, node.y);
+                if (node == head.prev) {
+                    node = null;
+                } else {
+                    node = node.next;
+                }
+                return point;
+            }
+        };
     }
 
     @Override

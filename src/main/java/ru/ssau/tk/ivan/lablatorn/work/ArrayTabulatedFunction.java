@@ -4,8 +4,9 @@ import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
 import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction  {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     private final double[] xValues;
     private final double[] yValues;
@@ -54,10 +55,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction  {
         }
     }
 
-    @Override
-    public Iterator<Point> iterator() {
-        throw new UnsupportedOperationException();
-    }
 
     @Override
     public int getCount() {
@@ -113,6 +110,11 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction  {
     }
 
     @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public int floorIndexOfX(double x) {
         if (indexOfX(x) != -1) {
             return indexOfX(x);
@@ -146,5 +148,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction  {
         return super.interpolate(x, xValues[floorIndex], xValues[floorIndex + 1],
                 yValues[floorIndex], yValues[floorIndex + 1]);
     }
+
 }
 
