@@ -1,5 +1,6 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
+import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
 import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 
 import java.util.Arrays;
@@ -14,6 +15,11 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction  {
         if (xValues.length < 2) {
             throw new IllegalArgumentException("Length less than 2 point");
         }
+
+        super.checkLengthIsTheSame(xValues, yValues);
+        super.checkSorted(xValues);
+        super.checkSorted(yValues);
+
         this.count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
@@ -134,6 +140,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction  {
 
     @Override
     public double interpolate(double x, int floorIndex) {
+        if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
+            throw new InterpolationException();
+        }
         return super.interpolate(x, xValues[floorIndex], xValues[floorIndex + 1],
                 yValues[floorIndex], yValues[floorIndex + 1]);
     }
