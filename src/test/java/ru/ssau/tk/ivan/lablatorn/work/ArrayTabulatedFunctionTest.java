@@ -2,7 +2,7 @@ package ru.ssau.tk.ivan.lablatorn.work;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class ArrayTabulatedFunctionTest {
 
@@ -54,7 +54,9 @@ public class ArrayTabulatedFunctionTest {
         TabulatedFunction firstFunction = firstFunction();
         for (int element = 0; element < 100; element++) {
             assertEquals(firstFunction.getX(element), element * (END - BEGIN) / 99.0 + BEGIN, DELTA);
+
         }
+
     }
 
     @Test

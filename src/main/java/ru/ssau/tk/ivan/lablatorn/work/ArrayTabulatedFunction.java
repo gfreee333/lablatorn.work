@@ -1,8 +1,10 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
+import ru.ssau.tk.ivan.lablatorn.work.function.Point;
+
 import java.util.Arrays;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction  {
 
     private final double[] xValues;
     private final double[] yValues;
@@ -44,6 +46,11 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         if (index < 0 || index > count - 1) {
             throw new IllegalArgumentException("Incorrect Index");
         }
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
     }
 
     @Override
