@@ -9,7 +9,7 @@ public class ArrayTabulatedFunctionTest {
     private final double DELTA = 0.0001;
     private final double BEGIN = 1;
     private final double END = 100;
-    private final double[] xValues = new double[]{3.4, 5.2, 6.0, 2.1};
+    private final double[] xValues = new double[]{2.1, 3.4, 5.2, 6.0};
     private final double[] yValues = new double[]{-2.4, 1.2, 3.0, 5.1};
 
     private final MathFunction sqr = new SqrFunction();
@@ -72,7 +72,7 @@ public class ArrayTabulatedFunctionTest {
         TabulatedFunction firstFunction = firstFunction();
         TabulatedFunction array = createFromArray();
         assertEquals(firstFunction.leftBound(), BEGIN, DELTA);
-        assertEquals(array.leftBound(), 3.4, DELTA);
+        assertEquals(array.leftBound(), 2.1, DELTA);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class ArrayTabulatedFunctionTest {
         TabulatedFunction firstFunction = firstFunction();
         TabulatedFunction array = createFromArray();
         assertEquals(firstFunction.rightBound(), END, DELTA);
-        assertEquals(array.rightBound(), 2.1, DELTA);
+        assertEquals(array.rightBound(), 6.0, DELTA);
     }
 
     @Test
@@ -124,7 +124,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(firstFunction.extrapolateLeft(0.1), -1.7000, DELTA);
         assertEquals(firstFunction.extrapolateLeft(0.9), 0.70000, DELTA);
         assertEquals(firstFunction.extrapolateLeft(Double.NEGATIVE_INFINITY), Double.NEGATIVE_INFINITY);
-        assertEquals(array.extrapolateLeft(0.1),-8.9999, DELTA);
+        assertEquals(array.extrapolateLeft(0.1),-7.9384, DELTA);
     }
 
     @Test
@@ -134,7 +134,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(firstFunction.extrapolateRight(150), 19950.0, DELTA);
         assertEquals(firstFunction.extrapolateRight(120), 13980.0, DELTA);
         assertEquals(firstFunction.extrapolateRight(Double.POSITIVE_INFINITY), Double.POSITIVE_INFINITY);
-        assertEquals(array.extrapolateRight(4.0), 4.0769, DELTA);
+        assertEquals(array.extrapolateRight(4.0), -0.1500, DELTA);
     }
 
     @Test

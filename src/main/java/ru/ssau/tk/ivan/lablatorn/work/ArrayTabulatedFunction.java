@@ -17,13 +17,12 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
             throw new IllegalArgumentException("Length less than 2 point");
         }
 
-        super.checkLengthIsTheSame(xValues, yValues);
-        super.checkSorted(xValues);
-        super.checkSorted(yValues);
-
         this.count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
+
+        super.checkLengthIsTheSame(xValues, yValues);
+        super.checkSorted(xValues);
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
@@ -132,12 +131,12 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double extrapolateLeft(double x) {
-        return interpolate(x, 0);
+        return super.interpolate(x, xValues[0], xValues[1], yValues[0], yValues[1]);
     }
 
     @Override
     public double extrapolateRight(double x) {
-        return interpolate(x, count - 2);
+        return super.interpolate(x, xValues[count - 2], xValues[count - 1], yValues[count - 2], yValues[count - 1]);
     }
 
     @Override
@@ -145,8 +144,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
             throw new InterpolationException();
         }
-        return super.interpolate(x, xValues[floorIndex], xValues[floorIndex + 1],
-                yValues[floorIndex], yValues[floorIndex + 1]);
+        return super.interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }
 
 }

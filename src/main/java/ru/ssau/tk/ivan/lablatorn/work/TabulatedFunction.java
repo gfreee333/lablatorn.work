@@ -2,9 +2,7 @@ package ru.ssau.tk.ivan.lablatorn.work;
 
 import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 
-import java.util.Iterator;
-
-public interface TabulatedFunction extends MathFunction, Iterable<Point>{
+public interface TabulatedFunction extends MathFunction, Iterable <Point> {
 
     int getCount();
 

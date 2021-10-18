@@ -26,7 +26,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
         super.checkLengthIsTheSame(xValues, yValues);
         super.checkSorted(xValues);
-        super.checkSorted(yValues);
+
 
         for (int i = 0; i < xValues.length; i++) {
             this.addNode(xValues[i], yValues[i]);
