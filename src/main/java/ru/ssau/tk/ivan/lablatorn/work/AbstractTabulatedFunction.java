@@ -2,11 +2,10 @@ package ru.ssau.tk.ivan.lablatorn.work;
 
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.DifferentLengthOfArraysException;
-import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 
 import java.util.Iterator;
 
-public abstract class AbstractTabulatedFunction implements TabulatedFunction, Iterator<Point> {
+public abstract class AbstractTabulatedFunction implements TabulatedFunction {
 
     protected abstract int floorIndexOfX(double x);
 
