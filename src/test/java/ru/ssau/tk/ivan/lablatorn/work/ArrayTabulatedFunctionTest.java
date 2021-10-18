@@ -111,10 +111,8 @@ public class ArrayTabulatedFunctionTest {
         for (int element = 0; element < 100; element++) {
             assertEquals(firstFunction.floorIndexOfX(BEGIN + element * (END - BEGIN) / 99.0), element, DELTA);
         }
-        assertEquals(firstFunction.floorIndexOfX(0.1), 0);
         assertEquals(firstFunction.floorIndexOfX(102.0), 100);
         assertEquals(firstFunction.floorIndexOfX(30.6), 29);
-        assertEquals(array.floorIndexOfX(3.0), 0);
     }
 
     @Test
