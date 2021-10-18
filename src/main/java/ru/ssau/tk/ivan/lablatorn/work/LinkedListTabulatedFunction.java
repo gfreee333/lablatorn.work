@@ -1,5 +1,7 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
+import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private Node head; //голова списка
@@ -16,6 +18,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (xValues.length < 2) {
             throw new IllegalArgumentException("Length less than 2 point");
         }
+
+        super.checkLengthIsTheSame(xValues, yValues);
+        super.checkSorted(xValues);
+        super.checkSorted(yValues);
+
+        this.count = xValues.length;
         for (int i = 0; i < xValues.length; i++) {
             this.addNode(xValues[i], yValues[i]);
         }
@@ -167,8 +175,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected double interpolate(double x, int floorIndex) {
+
         Node leftNode = getNode(floorIndex);
         Node rightNode = leftNode.next;
+        if (x < leftNode.x || x > rightNode.x) {
+            throw new InterpolationException();
+        }
         return interpolate(x, leftNode.x, rightNode.x, leftNode.y, rightNode.y);
     }
 }
