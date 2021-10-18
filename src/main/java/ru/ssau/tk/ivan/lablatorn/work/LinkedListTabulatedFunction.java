@@ -3,7 +3,7 @@ package ru.ssau.tk.ivan.lablatorn.work;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
 import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction  {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private Node head; //голова списка
     private int count;
@@ -65,10 +65,19 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction  {
         head.prev = newNode;
         count++;
     }
+
     @Override
     public Iterator<Point> iterator() {
-        throw new UnsupportedOperationException();
+        return new Iterator<Point>() {
+            Node node = head ;
+
+            @Override
+            public Iterator<Point> iterator() {
+                return null;
+            }
+        };
     }
+
 
     @Override
     public double leftBound() {
