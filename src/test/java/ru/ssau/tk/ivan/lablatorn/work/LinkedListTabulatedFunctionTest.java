@@ -9,7 +9,7 @@ import static org.testng.Assert.*;
 
 public class LinkedListTabulatedFunctionTest {
 
-    private final double[] xValues = new double[]{1, 2, 3, 5, 10, 6, 20};
+    private final double[] xValues = new double[]{1, 2, 3, 5, 6, 10, 20};
     private final double[] yValues = new double[]{2, 20, 50, 40, 60, 70, 6};
     private final double DELTA = 0.001;
 
@@ -64,7 +64,7 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(list.getX(3), 5, DELTA);
         assertEquals(list.getX(2), 3.0, DELTA);
         assertEquals(list.getX(3), 5, DELTA);
-        assertEquals(list.getX(5), 6, DELTA);
+        assertEquals(list.getX(5), 10, DELTA);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class LinkedListTabulatedFunctionTest {
     public void testIndexOfX() {
         TabulatedFunction list = createFromList();
         TabulatedFunction test = testFunction();
-        assertEquals(list.indexOfX(10), 4, DELTA);
+        assertEquals(list.indexOfX(10), 5, DELTA);
         assertEquals(list.indexOfX(200), -1., DELTA);
         assertEquals(test.indexOfX(20), -1, DELTA);
         assertEquals(list.indexOfX(5), 3, DELTA);
@@ -124,27 +124,27 @@ public class LinkedListTabulatedFunctionTest {
     public void testExtrapolateLeft() {
         AbstractTabulatedFunction list = createFromList();
         AbstractTabulatedFunction test = testFunction();
-        assertEquals(list.extrapolateLeft(5), 74.0, DELTA);
-        assertEquals(list.extrapolateLeft(2), 20.0, DELTA);
-        assertEquals(list.extrapolateLeft(25), 434.0, DELTA);
-        assertEquals(test.extrapolateLeft(15), 9.397, DELTA);
+        assertEquals(list.extrapolateLeft(-5), -106.0, DELTA);
+        assertEquals(list.extrapolateLeft(-2), -52.0, DELTA);
+        assertEquals(list.extrapolateLeft(-25), -466.0, DELTA);
+        assertEquals(test.extrapolateLeft(1), -15.099, DELTA);
     }
 
     @Test
     public void testExtrapolateRight() {
         AbstractTabulatedFunction list = createFromList();
         AbstractTabulatedFunction test = testFunction();
-        assertEquals(list.extrapolateRight(10), 51.714, DELTA);
-        assertEquals(list.extrapolateRight(7), 65.428, DELTA);
-        assertEquals(test.extrapolateRight(20), 2.237, DELTA);
+        assertEquals(list.extrapolateRight(100), -506.0, DELTA);
+        assertEquals(list.extrapolateRight(70), -314.0, DELTA);
+        assertEquals(test.extrapolateRight(200), 698.851, DELTA);
     }
 
     @Test
     public void testInterpolate() {
         AbstractTabulatedFunction list = createFromList();
-        assertEquals(list.interpolate(2.5, 5), 86, DELTA);
-        assertEquals(list.interpolate(2.6, 5), 85.542, DELTA);
-        assertEquals(list.interpolate(3, 6), 2.421, DELTA);
+        assertEquals(list.interpolate(2.5, 1), 35.0, DELTA);
+        assertEquals(list.interpolate(2.6, 1), 38.0, DELTA);
+        assertEquals(list.interpolate(4, 2), 45.0, DELTA);
     }
 
     @Test
@@ -168,7 +168,7 @@ public class LinkedListTabulatedFunctionTest {
         TabulatedFunction test = testFunction();
         TabulatedFunction firstFunction = firstFunction();
         TabulatedFunction secondFunction = secondFunction();
-        assertEquals(list.apply(15), 28.857, DELTA);
+        assertEquals(list.apply(15), 38, DELTA);
         assertEquals(test.apply(1), -15.099, DELTA);
         assertEquals(firstFunction.apply(30), 900.0, DELTA);
         assertEquals(secondFunction.apply(60), 1.0, DELTA);
