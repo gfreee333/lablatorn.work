@@ -13,6 +13,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        if(xValues.length < 2){
+            throw new IllegalArgumentException("Length less than 2 point");
+        }
         for (int i = 0; i < xValues.length; i++) {
             this.addNode(xValues[i], yValues[i]);
         }
@@ -20,11 +23,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
         double step = (xTo - xFrom) / (count - 1);
-        for (int i = 0; i < count; i++) {
-            this.addNode(xFrom, source.apply(xFrom));
-            xFrom += step;
-        }
-
+            for (int i = 0; i < count; i++) {
+                this.addNode(xFrom, source.apply(xFrom));
+                xFrom += step;
+            }
     }
 
     public void addNode(double x, double y) {
@@ -46,7 +48,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double leftBound() {
-
         return head.x;
     }
 
@@ -57,29 +58,32 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private Node getNode(int index) {
         Node indexNode;
-        if (index <= (count / 2)) {
-            indexNode = head;
-            for (int i = 0; i < count; i++) {
-                if (i == index) {
-                    return indexNode;
+        try {
+            if (index <= (count / 2)) {
+                indexNode = head;
+                for (int i = 0; i < count; i++) {
+                    if (i == index) {
+                        return indexNode;
+                    }
+                    indexNode = indexNode.next;
                 }
-                indexNode = indexNode.next;
-            }
-        } else {
-            indexNode = head.prev;
-            for (int i = count - 1; i > 0; i--) {
-                if (i == index) {
-                    return indexNode;
+            } else {
+                indexNode = head.prev;
+                for (int i = count - 1; i > 0; i--) {
+                    if (i == index) {
+                        return indexNode;
+                    }
+                    indexNode = indexNode.prev;
                 }
-                indexNode = indexNode.prev;
             }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
         return null;
     }
 
     @Override
     public double getX(int index) {
-
         return getNode(index).x;
     }
 
