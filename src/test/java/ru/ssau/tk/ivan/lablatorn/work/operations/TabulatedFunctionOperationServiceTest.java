@@ -9,8 +9,8 @@ import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 import static org.testng.Assert.*;
 
 public class TabulatedFunctionOperationServiceTest {
-    private final double[] valuesX = new double[]{-2, -4, -5, 6, 8, 10, 27};
-    private final double[] valuesY = new double[]{3, -22, 1, 0, 21, 25, 30};
+    private final double[] valuesX = new double[]{-5, -4, -3, 6, 8, 10, 27};
+    private final double[] valuesY = new double[]{-33, -22, -1, 0, 21, 25, 30};
     private final double[] valuesYForList = new double[]{1, 2, 3, 4, 5, 6, 7};
     double DELTA = 0.001;
 
@@ -108,19 +108,19 @@ public class TabulatedFunctionOperationServiceTest {
             assertEquals(point.x, valuesX[i]);
             assertEquals(point.y, valuesY[i] * valuesY[i++]);
         }
-        TabulatedFunction testMultiplicationOfList = new TabulatedFunctionOperationService().multiplication(testListFunction, testListFunction);
+
+        TabulatedFunction testMultiplicationOfLists = new TabulatedFunctionOperationService().multiplication(testListFunction, testListFunction);
         i = 0;
-        for (Point point : testMultiplicationOfList) {
+        for (Point point : testMultiplicationOfLists) {
             assertEquals(point.x, valuesX[i]);
-            assertEquals(point.y, valuesY[i] * valuesY[i++]);
+            assertEquals(point.y, valuesYForList[i] * valuesYForList[i++]);
         }
-        TabulatedFunction testMultiplicationArrayAndList = new TabulatedFunctionOperationService().multiplication(testArrayFunction, testListFunction);
-        {
-            i = 0;
-            for (Point point : testMultiplicationArrayAndList) {
-                assertEquals(point.x, valuesX[i]);
-                assertEquals(point.y, valuesY[i] * valuesY[i++]);
-            }
+
+        TabulatedFunction testMultiplicationOfArrayAndList = new TabulatedFunctionOperationService().multiplication(testArrayFunction, testListFunction);
+        i = 0;
+        for (Point point : testMultiplicationOfArrayAndList) {
+            assertEquals(point.x, valuesX[i]);
+            assertEquals(point.y, valuesY[i] * valuesYForList[i++]);
         }
     }
 
@@ -135,19 +135,19 @@ public class TabulatedFunctionOperationServiceTest {
             assertEquals(point.x, valuesX[i]);
             assertEquals(point.y, valuesY[i] / valuesY[i++]);
         }
-        TabulatedFunction testDivisionOfList = new TabulatedFunctionOperationService().division(testListFunction, testListFunction);
+
+        TabulatedFunction testDivisionOfLists = new TabulatedFunctionOperationService().division(testListFunction, testListFunction);
         i = 0;
-        for (Point point : testDivisionOfList) {
+        for (Point point : testDivisionOfLists) {
             assertEquals(point.x, valuesX[i]);
-            assertEquals(point.y, valuesY[i] / valuesY[i++]);
+            assertEquals(point.y, valuesYForList[i] / valuesYForList[i++]);
         }
-        TabulatedFunction testDivisionArrayAndList = new TabulatedFunctionOperationService().division(testArrayFunction, testListFunction);
-        {
-            i = 0;
-            for (Point point : testDivisionArrayAndList) {
-                assertEquals(point.x, valuesX[i]);
-                assertEquals(point.y, valuesY[i] / valuesY[i++]);
-            }
+
+        TabulatedFunction testDivisionOfArrayAndList = new TabulatedFunctionOperationService().division(testArrayFunction, testListFunction);
+        i = 0;
+        for (Point point : testDivisionOfArrayAndList) {
+            assertEquals(point.x, valuesX[i]);
+            assertEquals(point.y, valuesY[i] / valuesYForList[i++]);
         }
     }
 }
