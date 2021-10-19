@@ -1,6 +1,9 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.ivan.lablatorn.work.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.ivan.lablatorn.work.exceptions.DifferentLengthOfArraysException;
+import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
 import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 
 import java.util.Iterator;
@@ -10,7 +13,10 @@ import static org.testng.Assert.*;
 public class LinkedListTabulatedFunctionTest {
 
     private final double[] xValues = new double[]{1, 2, 3, 5, 6, 10, 20};
+    private final double[] xValuesWrong1 = new double[]{10.1, 3.4, 5.2, 6.0};
+    private final double[] xValuesWrong2 = new double[]{10.1, 3.4, 5.2, 6.0, 10.0};
     private final double[] yValues = new double[]{2, 20, 50, 40, 60, 70, 6};
+    private final double[] yValuesWrong1 = new double[]{10.1, 4.5, 2.2, 2.0};
     private final double DELTA = 0.001;
 
     private final MathFunction tan = new TangFunction();
@@ -33,6 +39,11 @@ public class LinkedListTabulatedFunctionTest {
         return new LinkedListTabulatedFunction(unit, 10, 40, 60);
     }
 
+    @Test
+    public void testLinkedListTabulatedFunction() {
+        assertThrows(DifferentLengthOfArraysException.class, () -> new LinkedListTabulatedFunction(xValuesWrong2, yValuesWrong1));
+        assertThrows(ArrayIsNotSortedException.class, () -> new LinkedListTabulatedFunction(xValuesWrong1, yValuesWrong1));
+    }
 
     @Test
     public void testLeftBound() {
@@ -145,6 +156,7 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(list.interpolate(2.5, 1), 35.0, DELTA);
         assertEquals(list.interpolate(2.6, 1), 38.0, DELTA);
         assertEquals(list.interpolate(4, 2), 45.0, DELTA);
+        assertThrows(InterpolationException.class, () -> list.interpolate(2.5, 3));
     }
 
     @Test

@@ -1,6 +1,9 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.ivan.lablatorn.work.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.ivan.lablatorn.work.exceptions.DifferentLengthOfArraysException;
+import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
 
 import static org.testng.Assert.*;
 
@@ -10,7 +13,11 @@ public class ArrayTabulatedFunctionTest {
     private final double BEGIN = 1;
     private final double END = 100;
     private final double[] xValues = new double[]{2.1, 3.4, 5.2, 6.0};
+    private final double[] xValuesWrong1 = new double[]{10.1, 3.4, 5.2, 6.0};
+    private final double[] xValuesWrong2 = new double[]{10.1, 3.4, 5.2, 6.0, 10.0};
     private final double[] yValues = new double[]{-2.4, 1.2, 3.0, 5.1};
+    private final double[] yValuesWrong1 = new double[]{10.1, 4.5, 2.2, 2.0};
+
 
     private final MathFunction sqr = new SqrFunction();
 
@@ -23,6 +30,11 @@ public class ArrayTabulatedFunctionTest {
         return new ArrayTabulatedFunction(sqr, BEGIN, END, 100);
     }
 
+    @Test
+    public void ArrayTabulatedFunction() {
+        assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(xValuesWrong1, yValuesWrong1));
+        assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(xValuesWrong2, yValuesWrong1));
+    }
 
     @Test
     public void testSetY() {
@@ -135,6 +147,15 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(firstFunction.extrapolateRight(120), 13980.0, DELTA);
         assertEquals(firstFunction.extrapolateRight(Double.POSITIVE_INFINITY), Double.POSITIVE_INFINITY);
         assertEquals(array.extrapolateRight(4.0), -0.1500, DELTA);
+    }
+
+    @Test
+    public void testInterpolate() {
+        AbstractTabulatedFunction firstFunction = firstFunction();
+        AbstractTabulatedFunction array = createFromArray();
+        assertEquals(firstFunction.interpolate(4.5, 3), 20.5, DELTA);
+        assertEquals(array.interpolate(3.5, 1), 1.3, DELTA);
+        assertThrows(InterpolationException.class, () -> array.interpolate(3.5, 2));
     }
 
     @Test

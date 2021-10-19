@@ -17,12 +17,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
             throw new IllegalArgumentException("Length less than 2 point");
         }
 
+        super.checkLengthIsTheSame(xValues, yValues);
+        super.checkSorted(xValues);
+
         this.count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
 
-        super.checkLengthIsTheSame(xValues, yValues);
-        super.checkSorted(xValues);
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
