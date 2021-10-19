@@ -26,10 +26,10 @@ public class AbstractTabulatedFunctionTest {
 
     @Test
     public void testCheckSorted() {
-        ArrayTabulatedFunction funk = createFromArray();
-        assertThrows(ArrayIsNotSortedException.class, () -> funk.checkSorted(xValues3));
-        assertThrows(ArrayIsNotSortedException.class, () -> funk.checkSorted(yValues1));
-        assertThrows(ArrayIsNotSortedException.class, () -> funk.checkSorted(yValues2));
+        ArrayTabulatedFunction function = createFromArray();
+        assertThrows(ArrayIsNotSortedException.class, () -> function.checkSorted(xValues3));
+        assertThrows(ArrayIsNotSortedException.class, () -> function.checkSorted(yValues1));
+        assertThrows(ArrayIsNotSortedException.class, () -> function.checkSorted(yValues2));
     }
 
 }
