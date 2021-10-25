@@ -43,6 +43,17 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(array.getY(2), 1000, DELTA);
         array.setY(2, 2222);
         assertEquals(array.getY(2), 2222, DELTA);
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            array.setY(-20, 200);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            array.setY(2000, 22);
+        });
+        assertThrows(NegativeArraySizeException.class, () -> {
+            for (int element = -1; element < 2; element--) {
+                int[] arr = new int[element];
+            }
+        });
     }
 
     @Test
@@ -66,8 +77,18 @@ public class ArrayTabulatedFunctionTest {
         TabulatedFunction firstFunction = firstFunction();
         for (int element = 0; element < 100; element++) {
             assertEquals(firstFunction.getX(element), element * (END - BEGIN) / 99.0 + BEGIN, DELTA);
-
         }
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            firstFunction.getX(20000);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            firstFunction.getX(-20);
+        });
+        assertThrows(NegativeArraySizeException.class, () -> {
+            for (int element = -1; element < 2; element--) {
+                int[] array = new int[element];
+            }
+        });
 
     }
 
@@ -77,6 +98,17 @@ public class ArrayTabulatedFunctionTest {
         for (int element = 0; element < 99; element++) {
             assertEquals(firstFunction.getY(element), sqr.apply(firstFunction.getX(element)), DELTA);
         }
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            firstFunction.getY(400);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            firstFunction.getY(-20);
+        });
+        assertThrows(NegativeArraySizeException.class, () -> {
+            for (int element = -1; element < 2; element--) {
+                int[] array = new int[element];
+            }
+        });
     }
 
     @Test
@@ -136,7 +168,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(firstFunction.extrapolateLeft(0.1), -1.7000, DELTA);
         assertEquals(firstFunction.extrapolateLeft(0.9), 0.70000, DELTA);
         assertEquals(firstFunction.extrapolateLeft(Double.NEGATIVE_INFINITY), Double.NEGATIVE_INFINITY);
-        assertEquals(array.extrapolateLeft(0.1),-7.9384, DELTA);
+        assertEquals(array.extrapolateLeft(0.1), -7.9384, DELTA);
     }
 
     @Test
@@ -156,6 +188,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(firstFunction.interpolate(4.5, 3), 20.5, DELTA);
         assertEquals(array.interpolate(3.5, 1), 1.3, DELTA);
         assertThrows(InterpolationException.class, () -> array.interpolate(3.5, 2));
+        assertThrows(InterpolationException.class, () -> firstFunction.interpolate(22, 2));
     }
 
     @Test
@@ -166,5 +199,6 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(firstFunction.apply(50), 2500.0, DELTA);
         assertEquals(firstFunction.apply(30.6), 936.6, DELTA);
     }
+
 }
 

@@ -8,11 +8,11 @@ import java.util.NoSuchElementException;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
-    private Node head; //голова списка
+    private Node head;
     private int count;
 
 
-    public class Node {
+    protected class Node {
         double x;
         double y;
         Node next;
@@ -37,7 +37,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (count < 2) {
             throw new IllegalArgumentException("Length less than 2 points");
         }
-        if (xFrom >= xTo || xTo < 0 | xFrom < 0) {
+        if (xFrom >= xTo) {
             throw new IllegalArgumentException("Incorrect parameter values");
         }
         double step = (xTo - xFrom) / (count - 1);
@@ -153,7 +153,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public Iterator<Point> iterator() {
-        return new Iterator<Point>() {
+        return new Iterator<>() {
             Node node = head;
 
             @Override

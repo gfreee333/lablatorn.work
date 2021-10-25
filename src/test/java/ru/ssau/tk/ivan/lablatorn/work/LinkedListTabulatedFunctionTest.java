@@ -76,6 +76,12 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(list.getX(2), 3.0, DELTA);
         assertEquals(list.getX(3), 5, DELTA);
         assertEquals(list.getX(5), 10, DELTA);
+        assertThrows(IllegalArgumentException.class,()-> {
+            list.getY(-2000);
+        });
+        assertThrows(IllegalArgumentException.class,()-> {
+            list.getY(1000);
+        });
     }
 
     @Test
@@ -85,6 +91,12 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(list.getY(4), 60, DELTA);
         assertEquals(list.getY(0), 2, DELTA);
         assertEquals(test.getY(3), 4.342, DELTA);
+        assertThrows(IllegalArgumentException.class,()-> {
+            test.getY(2000);
+        });
+        assertThrows(IllegalArgumentException.class,()-> {
+            list.getY(-1000);
+        });
     }
 
     @Test
@@ -96,6 +108,12 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(list.getY(3), testValueY, DELTA);
         list.setY(5, testValueY1);
         assertEquals(list.getY(5), testValueY1, DELTA);
+        assertThrows(IllegalArgumentException.class, () -> {
+            list.setY(25, testValueY);
+        });
+        assertThrows(IllegalArgumentException.class,()->{
+            list.setY(-22,222);
+        });
     }
 
     @Test
@@ -157,6 +175,7 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(list.interpolate(2.6, 1), 38.0, DELTA);
         assertEquals(list.interpolate(4, 2), 45.0, DELTA);
         assertThrows(InterpolationException.class, () -> list.interpolate(2.5, 3));
+        assertThrows(InterpolationException.class,()->list.interpolate(22,2));
     }
 
     @Test
@@ -199,10 +218,9 @@ public class LinkedListTabulatedFunctionTest {
     public void testIteratorForEach() {
         TabulatedFunction tabulatedFunction = testFunction();
         int i = 0;
-        int j = 0;
         for (Point point : tabulatedFunction) {
-            assertEquals(point.x, tabulatedFunction.getX(i++), DELTA);
-            assertEquals(point.y, tabulatedFunction.getY(j++), DELTA);
+            assertEquals(point.x, tabulatedFunction.getX(i), DELTA);
+            assertEquals(point.y, tabulatedFunction.getY(i++), DELTA);
         }
     }
 
@@ -212,12 +230,10 @@ public class LinkedListTabulatedFunctionTest {
         Iterator<Point> arrayIterator = array.iterator();
 
         int i = 0;
-        int j = 0;
         while (arrayIterator.hasNext()) {
             Point point = arrayIterator.next();
-            assertEquals(array.getX(i++), point.x);
-            assertEquals(array.getY(j++), point.y);
+            assertEquals(array.getX(i), point.x);
+            assertEquals(array.getY(i++), point.y);
         }
     }
-
 }

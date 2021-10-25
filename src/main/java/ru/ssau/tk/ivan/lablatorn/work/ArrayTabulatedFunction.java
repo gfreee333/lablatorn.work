@@ -15,7 +15,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2) {
-            throw new IllegalArgumentException("Length less than 2 point");
+            throw new IndexOutOfBoundsException("Length less than 2 point");
         }
 
         super.checkLengthIsTheSame(xValues, yValues);
@@ -29,10 +29,10 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
         if (count < 2) {
-            throw new IllegalArgumentException("Length less than 2 point");
+            throw new IndexOutOfBoundsException("Length less than 2 point");
         }
-        if (xFrom >= xTo || xTo < 0 | xFrom < 0) {
-            throw new IllegalArgumentException("Incorrect parameter values");
+        if (xFrom >= xTo) {
+            throw new IndexOutOfBoundsException("Incorrect parameter values");
         }
         double step = (xTo - xFrom) / (count - 1);
         double[] xValues = new double[count];
@@ -50,12 +50,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         this.yValues = Arrays.copyOf(yValues, count);
     }
 
-    void checkIndex(int index) {
-        if (index < 0 || index > count - 1) {
-            throw new IllegalArgumentException("Incorrect Index");
-        }
-    }
-
 
     @Override
     public int getCount() {
@@ -64,19 +58,19 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double getX(int index) {
-        checkIndex(index);
+
         return xValues[index];
     }
 
     @Override
     public double getY(int index) {
-        checkIndex(index);
+
         return yValues[index];
     }
 
     @Override
     public void setY(int index, double value) {
-        checkIndex(index);
+
         yValues[index] = value;
     }
 
@@ -112,7 +106,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public Iterator<Point> iterator() {
-        return new Iterator<Point>() {
+        return new Iterator<>() {
             int i = 0;
 
             @Override
@@ -142,7 +136,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
                 return element - 1;
             }
             if (x < xValues[element]) {
-                throw new IllegalArgumentException("X is less than left border");
+                throw new IndexOutOfBoundsException("X is less than left border");
             }
         }
         return count;
