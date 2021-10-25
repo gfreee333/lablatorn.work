@@ -1,6 +1,7 @@
-package ru.ssau.tk.ivan.lablatorn.work;
+package ru.ssau.tk.ivan.lablatorn.work.function.factory;
 
-import ru.ssau.tk.ivan.lablatorn.work.function.factory.TabulatedFunctionFactory;
+import ru.ssau.tk.ivan.lablatorn.work.function.LinkedListTabulatedFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
 
 public class LinkedListTabulatedFunctionFactory implements TabulatedFunctionFactory {
 

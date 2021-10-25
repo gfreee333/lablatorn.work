@@ -1,7 +1,7 @@
 package ru.ssau.tk.ivan.lablatorn.work.operations;
 
-import ru.ssau.tk.ivan.lablatorn.work.ArrayTabulatedFunctionFactory;
-import ru.ssau.tk.ivan.lablatorn.work.TabulatedFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.factory.ArrayTabulatedFunctionFactory;
+import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
 import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 import ru.ssau.tk.ivan.lablatorn.work.function.factory.TabulatedFunctionFactory;
 

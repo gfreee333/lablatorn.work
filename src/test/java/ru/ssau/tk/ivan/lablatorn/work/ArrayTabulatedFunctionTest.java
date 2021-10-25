@@ -4,6 +4,9 @@ import org.testng.annotations.Test;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
+import ru.ssau.tk.ivan.lablatorn.work.function.ArrayTabulatedFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.SqrFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
 
 import static org.testng.Assert.*;
 

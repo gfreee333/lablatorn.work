@@ -9,6 +9,6 @@ public class LeftSteppingDifferentialOperator extends SteppingDifferentialOperat
 
     @Override
     public MathFunction derive(MathFunction function) {
-        return x -> (function.apply(x) - function.apply(x - step)) / step;
+        return x -> (function.apply(x) - function.apply(x - step)) / step; //left right left
     }
 }

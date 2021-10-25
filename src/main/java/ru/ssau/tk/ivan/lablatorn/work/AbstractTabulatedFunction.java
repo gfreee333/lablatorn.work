@@ -2,8 +2,7 @@ package ru.ssau.tk.ivan.lablatorn.work;
 
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.DifferentLengthOfArraysException;
-
-import java.util.Iterator;
+import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
 
 public abstract class AbstractTabulatedFunction implements TabulatedFunction {
 

@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
-import ru.ssau.tk.ivan.lablatorn.work.function.Point;
+import ru.ssau.tk.ivan.lablatorn.work.function.*;
 
 import java.util.Iterator;
 
