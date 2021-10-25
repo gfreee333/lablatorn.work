@@ -1,9 +1,9 @@
 package ru.ssau.tk.ivan.lablatorn.work.operations;
 
 import org.testng.annotations.Test;
-import ru.ssau.tk.ivan.lablatorn.work.ArrayTabulatedFunction;
-import ru.ssau.tk.ivan.lablatorn.work.LinkedListTabulatedFunction;
-import ru.ssau.tk.ivan.lablatorn.work.TabulatedFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.ArrayTabulatedFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.LinkedListTabulatedFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
 import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 
 import static org.testng.Assert.*;

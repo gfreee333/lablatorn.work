@@ -1,5 +1,8 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
+import ru.ssau.tk.ivan.lablatorn.work.function.CompositeFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.factory.ArrayTabulatedFunctionFactory;
 import ru.ssau.tk.ivan.lablatorn.work.function.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.ivan.lablatorn.work.operations.DifferentialOperator;
 

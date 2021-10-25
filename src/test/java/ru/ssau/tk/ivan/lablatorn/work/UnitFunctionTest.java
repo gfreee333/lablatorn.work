@@ -1,6 +1,7 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.ivan.lablatorn.work.function.UnitFunction;
 
 import static org.testng.Assert.*;
 

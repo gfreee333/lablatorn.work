@@ -1,6 +1,10 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.ivan.lablatorn.work.function.ConstantFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.SqrFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.TangFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.ThreeRootFunction;
 
 import static org.testng.Assert.*;
 

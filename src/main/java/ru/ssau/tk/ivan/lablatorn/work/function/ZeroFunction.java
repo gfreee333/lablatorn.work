@@ -1,4 +1,6 @@
-package ru.ssau.tk.ivan.lablatorn.work;
+package ru.ssau.tk.ivan.lablatorn.work.function;
+
+import ru.ssau.tk.ivan.lablatorn.work.function.ConstantFunction;
 
 public class ZeroFunction extends ConstantFunction {
     public ZeroFunction() {

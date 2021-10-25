@@ -1,7 +1,7 @@
 package ru.ssau.tk.ivan.lablatorn.work.operations;
 
 import org.testng.annotations.Test;
-import ru.ssau.tk.ivan.lablatorn.work.SqrFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.SqrFunction;
 
 import static org.testng.Assert.*;
 

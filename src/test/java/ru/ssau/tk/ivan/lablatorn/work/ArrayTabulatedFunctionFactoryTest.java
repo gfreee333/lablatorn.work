@@ -1,6 +1,8 @@
 package ru.ssau.tk.ivan.lablatorn.work;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.ivan.lablatorn.work.function.ArrayTabulatedFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.factory.ArrayTabulatedFunctionFactory;
 
 import static org.testng.Assert.*;
 
