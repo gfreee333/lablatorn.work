@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.ivan.lablatorn.work.function.ArrayTabulatedFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.LinkedListTabulatedFunction;
 
 import static org.testng.Assert.*;
 
@@ -33,4 +34,11 @@ public class AbstractTabulatedFunctionTest {
         assertThrows(ArrayIsNotSortedException.class, () -> function.checkSorted(yValues2));
     }
 
+    @Test
+    public void testTestToString() {
+        double[] x = {1,2,3,4};
+        double[] y = {2,3,4,5};
+        assertEquals(new ArrayTabulatedFunction(x,y).toString(),"ArrayTabulatedFunction size = 4\n[1.0; 2.0]\n[2.0; 3.0]\n[3.0; 4.0]\n[4.0; 5.0]");
+        assertEquals(new LinkedListTabulatedFunction(x,y).toString(),"LinkedListTabulatedFunction size = 4\n[1.0; 2.0]\n[2.0; 3.0]\n[3.0; 4.0]\n[4.0; 5.0]");
+    }
 }

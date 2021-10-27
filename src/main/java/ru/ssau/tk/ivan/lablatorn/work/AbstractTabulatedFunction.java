@@ -2,6 +2,7 @@ package ru.ssau.tk.ivan.lablatorn.work;
 
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.DifferentLengthOfArraysException;
+import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
 
 public abstract class AbstractTabulatedFunction implements TabulatedFunction {
@@ -26,7 +27,7 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
 
     public void checkSorted(double[] array) throws ArrayIsNotSortedException {
         for (int i = 1; i < array.length; i++) {
-            if (array[i-1] > array[i]) {
+            if (array[i - 1] > array[i]) {
                 throw new ArrayIsNotSortedException();
             }
         }
@@ -45,4 +46,19 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append(getClass().getSimpleName()).append(" size = ").append(this.getCount()).append("\n");
+
+        for (Point point : this) {
+            str.append("[")
+                    .append(point.x)
+                    .append("; ")
+                    .append(point.y)
+                    .append("]\n");
+        }
+        str.deleteCharAt(str.length() - 1);
+        return str.toString();
+    }
 }
