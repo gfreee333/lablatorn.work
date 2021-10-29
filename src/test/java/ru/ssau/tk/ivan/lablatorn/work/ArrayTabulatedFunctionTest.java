@@ -4,10 +4,12 @@ import org.testng.annotations.Test;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
-import ru.ssau.tk.ivan.lablatorn.work.function.ArrayTabulatedFunction;
-import ru.ssau.tk.ivan.lablatorn.work.function.SqrFunction;
-import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
+import ru.ssau.tk.ivan.lablatorn.work.function.*;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import static java.lang.Double.NaN;
 import static org.testng.Assert.*;
 
 public class ArrayTabulatedFunctionTest {
@@ -21,16 +23,19 @@ public class ArrayTabulatedFunctionTest {
     private final double[] yValues = new double[]{-2.4, 1.2, 3.0, 5.1};
     private final double[] yValuesWrong1 = new double[]{10.1, 4.5, 2.2, 2.0};
 
-
+    private final MathFunction identityFunction = new IdentityFunction();
     private final MathFunction sqr = new SqrFunction();
 
     private ArrayTabulatedFunction createFromArray() {
         return new ArrayTabulatedFunction(xValues, yValues);
     }
 
-
     private ArrayTabulatedFunction firstFunction() {
         return new ArrayTabulatedFunction(sqr, BEGIN, END, 100);
+    }
+
+    private ArrayTabulatedFunction getRightBoundNaNFunction() {
+        return new ArrayTabulatedFunction(identityFunction, 1, Double.NaN, 3);
     }
 
     @Test
@@ -42,6 +47,7 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public void testSetY() {
         TabulatedFunction array = createFromArray();
+        TabulatedFunction arrayFunction = firstFunction();
         array.setY(2, 1000);
         assertEquals(array.getY(2), 1000, DELTA);
         array.setY(2, 2222);
@@ -52,11 +58,7 @@ public class ArrayTabulatedFunctionTest {
         assertThrows(IndexOutOfBoundsException.class, () -> {
             array.setY(2000, 22);
         });
-        assertThrows(NegativeArraySizeException.class, () -> {
-            for (int element = -1; element < 2; element--) {
-                int[] arr = new int[element];
-            }
-        });
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> arrayFunction.setY(-5, 10));
     }
 
     @Test
@@ -87,12 +89,10 @@ public class ArrayTabulatedFunctionTest {
         assertThrows(IndexOutOfBoundsException.class, () -> {
             firstFunction.getX(-20);
         });
-        assertThrows(NegativeArraySizeException.class, () -> {
-            for (int element = -1; element < 2; element--) {
-                int[] array = new int[element];
-            }
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> firstFunction.getX(-5));
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            firstFunction.getX(-1);
         });
-
     }
 
     @Test
@@ -106,11 +106,6 @@ public class ArrayTabulatedFunctionTest {
         });
         assertThrows(IndexOutOfBoundsException.class, () -> {
             firstFunction.getY(-20);
-        });
-        assertThrows(NegativeArraySizeException.class, () -> {
-            for (int element = -1; element < 2; element--) {
-                int[] array = new int[element];
-            }
         });
     }
 
@@ -201,6 +196,56 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(firstFunction.apply(110), 11990.0, DELTA);
         assertEquals(firstFunction.apply(50), 2500.0, DELTA);
         assertEquals(firstFunction.apply(30.6), 936.6, DELTA);
+    }
+
+    @Test
+    public void testIteratorWhile() {
+        final ArrayTabulatedFunction function = createFromArray();
+        final Iterator<Point> iterator = function.iterator();
+        final ArrayTabulatedFunction scaryFunction = getRightBoundNaNFunction();
+        final Iterator<Point> secondIterator = scaryFunction.iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(point.x, xValues[i], DELTA);
+            assertEquals(point.y, yValues[i++], DELTA);
+        }
+        assertEquals(i, function.getCount());
+        assertThrows(NoSuchElementException.class, iterator::next);
+        i = 0;
+        while (secondIterator.hasNext()) {
+            Point point = secondIterator.next();
+            assertEquals(point.x, scaryFunction.getX(i), DELTA);
+            assertEquals(point.y, scaryFunction.getY(i++), DELTA);
+        }
+        assertEquals(i, scaryFunction.getCount());
+        assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+    @Test
+    public void testIteratorForEach() {
+        final ArrayTabulatedFunction function = createFromArray();
+        final Iterator<Point> iterator = function.iterator();
+        final ArrayTabulatedFunction scaryFunction = getRightBoundNaNFunction();
+        final Iterator<Point> secondIterator = scaryFunction.iterator();
+        int i = 0;
+        for (Point point : function) {
+            Point iteratorPoint = iterator.next();
+            assertEquals(iteratorPoint.x, point.x, DELTA);
+            assertEquals(iteratorPoint.y, point.y, DELTA);
+            i++;
+        }
+        assertEquals(i, function.getCount());
+        assertThrows(NoSuchElementException.class, iterator::next);
+        i = 0;
+        for (Point point : scaryFunction) {
+            Point iteratorPoint = secondIterator.next();
+            assertEquals(iteratorPoint.x, point.x, DELTA);
+            assertEquals(iteratorPoint.y, point.y, DELTA);
+            i++;
+        }
+        assertEquals(i, scaryFunction.getCount());
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
 }
