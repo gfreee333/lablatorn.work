@@ -7,6 +7,7 @@ import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
 import ru.ssau.tk.ivan.lablatorn.work.function.*;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.testng.Assert.*;
 
@@ -25,6 +26,10 @@ public class LinkedListTabulatedFunctionTest {
 
     private LinkedListTabulatedFunction createFromList() {
         return new LinkedListTabulatedFunction(xValues, yValues);
+    }
+
+    private LinkedListTabulatedFunction getListFunction() {
+        return new LinkedListTabulatedFunction(sqr, 1, 9, 5);
     }
 
     private AbstractTabulatedFunction testFunction() {
@@ -76,10 +81,10 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(list.getX(2), 3.0, DELTA);
         assertEquals(list.getX(3), 5, DELTA);
         assertEquals(list.getX(5), 10, DELTA);
-        assertThrows(IllegalArgumentException.class,()-> {
+        assertThrows(IllegalArgumentException.class, () -> {
             list.getY(-2000);
         });
-        assertThrows(IllegalArgumentException.class,()-> {
+        assertThrows(IllegalArgumentException.class, () -> {
             list.getY(1000);
         });
     }
@@ -91,10 +96,10 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(list.getY(4), 60, DELTA);
         assertEquals(list.getY(0), 2, DELTA);
         assertEquals(test.getY(3), 4.342, DELTA);
-        assertThrows(IllegalArgumentException.class,()-> {
+        assertThrows(IllegalArgumentException.class, () -> {
             test.getY(2000);
         });
-        assertThrows(IllegalArgumentException.class,()-> {
+        assertThrows(IllegalArgumentException.class, () -> {
             list.getY(-1000);
         });
     }
@@ -111,8 +116,8 @@ public class LinkedListTabulatedFunctionTest {
         assertThrows(IllegalArgumentException.class, () -> {
             list.setY(25, testValueY);
         });
-        assertThrows(IllegalArgumentException.class,()->{
-            list.setY(-22,222);
+        assertThrows(IllegalArgumentException.class, () -> {
+            list.setY(-22, 222);
         });
     }
 
@@ -175,7 +180,7 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(list.interpolate(2.6, 1), 38.0, DELTA);
         assertEquals(list.interpolate(4, 2), 45.0, DELTA);
         assertThrows(InterpolationException.class, () -> list.interpolate(2.5, 3));
-        assertThrows(InterpolationException.class,()->list.interpolate(22,2));
+        assertThrows(InterpolationException.class, () -> list.interpolate(22, 2));
     }
 
     @Test
@@ -216,24 +221,51 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testIteratorForEach() {
-        TabulatedFunction tabulatedFunction = testFunction();
+        final LinkedListTabulatedFunction function = createFromList();
+        final Iterator<Point> iterator = function.iterator();
+        final LinkedListTabulatedFunction scaryFunction = getListFunction();
+        final Iterator<Point> secondIterator = scaryFunction.iterator();
         int i = 0;
-        for (Point point : tabulatedFunction) {
-            assertEquals(point.x, tabulatedFunction.getX(i), DELTA);
-            assertEquals(point.y, tabulatedFunction.getY(i++), DELTA);
+        for (Point point : function) {
+            Point iteratorPoint = iterator.next();
+            assertEquals(iteratorPoint.x, point.x, DELTA);
+            assertEquals(iteratorPoint.y, point.y, DELTA);
+            i++;
         }
+        assertEquals(i, function.getCount());
+        assertThrows(NoSuchElementException.class, iterator::next);
+        i = 0;
+        for (Point point : scaryFunction) {
+            Point iteratorPoint = secondIterator.next();
+            assertEquals(iteratorPoint.x, point.x, DELTA);
+            assertEquals(iteratorPoint.y, point.y, DELTA);
+            i++;
+        }
+        assertEquals(i, scaryFunction.getCount());
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
     @Test
     public void testIteratorWhile() {
-        TabulatedFunction array = createFromList();
-        Iterator<Point> arrayIterator = array.iterator();
-
+        final LinkedListTabulatedFunction function = createFromList();
+        final Iterator<Point> iterator = function.iterator();
+        final LinkedListTabulatedFunction scaryFunction = getListFunction();
+        final Iterator<Point> secondIterator = scaryFunction.iterator();
         int i = 0;
-        while (arrayIterator.hasNext()) {
-            Point point = arrayIterator.next();
-            assertEquals(array.getX(i), point.x);
-            assertEquals(array.getY(i++), point.y);
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(point.x, function.getX(i), DELTA);
+            assertEquals(point.y, function.getY(i++), DELTA);
         }
+        assertEquals(i, function.getCount());
+        assertThrows(NoSuchElementException.class, iterator::next);
+        i = 0;
+        while (secondIterator.hasNext()) {
+            Point point = secondIterator.next();
+            assertEquals(point.x, scaryFunction.getX(i), DELTA);
+            assertEquals(point.y, scaryFunction.getY(i++), DELTA);
+        }
+        assertEquals(i, scaryFunction.getCount());
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 }
