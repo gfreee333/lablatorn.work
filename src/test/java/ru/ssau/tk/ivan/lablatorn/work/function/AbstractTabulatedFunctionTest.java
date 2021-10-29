@@ -1,4 +1,4 @@
-package ru.ssau.tk.ivan.lablatorn.work;
+package ru.ssau.tk.ivan.lablatorn.work.function;
 
 import org.testng.annotations.Test;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.ArrayIsNotSortedException;

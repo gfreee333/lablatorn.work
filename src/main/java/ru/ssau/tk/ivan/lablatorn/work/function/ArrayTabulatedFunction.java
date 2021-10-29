@@ -1,9 +1,6 @@
 package ru.ssau.tk.ivan.lablatorn.work.function;
 
-import ru.ssau.tk.ivan.lablatorn.work.AbstractTabulatedFunction;
-import ru.ssau.tk.ivan.lablatorn.work.MathFunction;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
-import ru.ssau.tk.ivan.lablatorn.work.function.Point;
 
 import java.util.Arrays;
 import java.util.Iterator;

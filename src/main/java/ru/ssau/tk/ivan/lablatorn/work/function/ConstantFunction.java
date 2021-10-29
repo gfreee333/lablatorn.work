@@ -1,7 +1,5 @@
 package ru.ssau.tk.ivan.lablatorn.work.function;
 
-import ru.ssau.tk.ivan.lablatorn.work.MathFunction;
-
 public class ConstantFunction implements MathFunction {
     private final double invariable;
 

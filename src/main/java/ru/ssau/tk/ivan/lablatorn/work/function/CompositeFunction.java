@@ -1,7 +1,5 @@
 package ru.ssau.tk.ivan.lablatorn.work.function;
 
-import ru.ssau.tk.ivan.lablatorn.work.MathFunction;
-
 public class CompositeFunction implements MathFunction {
     private final MathFunction firstFunction;
     private final MathFunction secondFunction;

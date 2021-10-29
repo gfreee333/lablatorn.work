@@ -1,4 +1,4 @@
-package ru.ssau.tk.ivan.lablatorn.work;
+package ru.ssau.tk.ivan.lablatorn.work.function.factory;
 
 import org.testng.annotations.Test;
 import ru.ssau.tk.ivan.lablatorn.work.function.ArrayTabulatedFunction;

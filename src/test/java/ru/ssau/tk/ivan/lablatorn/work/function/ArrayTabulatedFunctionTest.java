@@ -1,16 +1,15 @@
-package ru.ssau.tk.ivan.lablatorn.work;
+package ru.ssau.tk.ivan.lablatorn.work.function;
 
 import org.testng.annotations.Test;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
-import ru.ssau.tk.ivan.lablatorn.work.function.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static java.lang.Double.NaN;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertThrows;
 
 public class ArrayTabulatedFunctionTest {
 

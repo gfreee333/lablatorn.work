@@ -1,9 +1,7 @@
-package ru.ssau.tk.ivan.lablatorn.work;
+package ru.ssau.tk.ivan.lablatorn.work.function;
 
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.DifferentLengthOfArraysException;
-import ru.ssau.tk.ivan.lablatorn.work.function.Point;
-import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
 
 public abstract class AbstractTabulatedFunction implements TabulatedFunction {
 
