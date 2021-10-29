@@ -84,25 +84,28 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private Node getNode(int index) {
         checkIndex(index);
-        Node indexNode;
-        if (index <= (count / 2)) {
-            indexNode = head;
-            for (int i = 0; i < count; i++) {
-                if (i == index) {
-                    return indexNode;
+        try {
+            Node indexNode;
+            if (index <= (count / 2)) {
+                indexNode = head;
+                for (int i = 0; i < count; i++) {
+                    if (i == index) {
+                        return indexNode;
+                    }
+                    indexNode = indexNode.next;
                 }
-                indexNode = indexNode.next;
-            }
-        } else {
-            indexNode = head.prev;
-            for (int i = count - 1; i > 0; i--) {
-                if (i == index) {
-                    return indexNode;
+            } else {
+                indexNode = head.prev;
+                for (int i = count - 1; i > 0; i--) {
+                    if (i == index) {
+                        return indexNode;
+                    }
+                    indexNode = indexNode.prev;
                 }
-                indexNode = indexNode.prev;
             }
+        } catch (UnsupportedOperationException e) {
+            e.printStackTrace();
         }
-
         return null;
     }
 
