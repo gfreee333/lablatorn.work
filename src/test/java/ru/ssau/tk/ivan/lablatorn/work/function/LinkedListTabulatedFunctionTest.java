@@ -18,6 +18,8 @@ public class LinkedListTabulatedFunctionTest {
     private final double[] xValuesWrong2 = new double[]{10.1, 3.4, 5.2, 6.0, 10.0};
     private final double[] yValues = new double[]{2, 20, 50, 40, 60, 70, 6};
     private final double[] yValuesWrong1 = new double[]{10.1, 4.5, 2.2, 2.0};
+    private final double[] xValues1 = {1};
+    private final double[] yValues1 = {10};
     private final double DELTA = 0.001;
 
     private final MathFunction tan = new TangFunction();
@@ -48,6 +50,12 @@ public class LinkedListTabulatedFunctionTest {
     public void testLinkedListTabulatedFunction() {
         assertThrows(DifferentLengthOfArraysException.class, () -> new LinkedListTabulatedFunction(xValuesWrong2, yValuesWrong1));
         assertThrows(ArrayIsNotSortedException.class, () -> new LinkedListTabulatedFunction(xValuesWrong1, yValuesWrong1));
+    }
+
+    @Test
+    public void testArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(xValues1, yValues1));
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(sqr, 10, -1, 5));
     }
 
     @Test
@@ -152,6 +160,8 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(list.floorIndexOfX(5), 2, DELTA);
         assertEquals(test.floorIndexOfX(100), 40, DELTA);
         assertEquals(firstFunction.floorIndexOfX(25), 36, DELTA);
+        assertThrows(IllegalArgumentException.class, () -> list.floorIndexOfX(-15));
+        assertThrows(IllegalArgumentException.class, () -> list.floorIndexOfX(0));
     }
 
     @Test

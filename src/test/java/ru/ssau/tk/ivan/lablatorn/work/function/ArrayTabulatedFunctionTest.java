@@ -38,6 +38,15 @@ public class ArrayTabulatedFunctionTest {
     }
 
     @Test
+    public void testConstructorExceptions() {
+        final double[] brokenValues = {1, -1, 0};
+        final double[] singleElementArray = {1};
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(singleElementArray, yValues));
+        assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(brokenValues, yValues));
+        assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(brokenValues, brokenValues));
+    }
+
+    @Test
     public void ArrayTabulatedFunction() {
         assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(xValuesWrong1, yValuesWrong1));
         assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(xValuesWrong2, yValuesWrong1));
@@ -150,7 +159,7 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public void testFloorIndexOfX() {
         AbstractTabulatedFunction firstFunction = firstFunction();
-        ArrayTabulatedFunction array = createFromArray();
+        assertThrows(IndexOutOfBoundsException.class, () -> firstFunction.floorIndexOfX(-1));
         for (int element = 0; element < 100; element++) {
             assertEquals(firstFunction.floorIndexOfX(BEGIN + element * (END - BEGIN) / 99.0), element, DELTA);
         }
