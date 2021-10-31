@@ -1,6 +1,7 @@
 package ru.ssau.tk.ivan.lablatorn.work.operations;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.ivan.lablatorn.work.exceptions.InconsistentFunctionsException;
 import ru.ssau.tk.ivan.lablatorn.work.function.ArrayTabulatedFunction;
 import ru.ssau.tk.ivan.lablatorn.work.function.LinkedListTabulatedFunction;
 import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
@@ -14,33 +15,32 @@ public class TabulatedFunctionOperationServiceTest { // Доделать эти 
     private final double[] valuesX = new double[]{-5, -4, -3, 6, 8, 10, 27};
     private final double[] valuesY = new double[]{-33, -22, -1, 0, 21, 25, 30};
     private final double[] valuesYForList = new double[]{1, 2, 3, 4, 5, 6, 7};
-    private final TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
-    private final double DELTA = 0.001;
+    private final TabulatedFunctionOperationService serviceArray = new TabulatedFunctionOperationService();
+    private final TabulatedFunctionOperationService serviceList = new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory());
+    private final double DELTA = 0.0001;
 
-    private ArrayTabulatedFunction getTestArray() {
+    private TabulatedFunction getTestArray() {
         return new ArrayTabulatedFunction(valuesX, valuesY);
     }
 
-    private LinkedListTabulatedFunction getTestList() {
-        return new LinkedListTabulatedFunction(valuesX, valuesYForList);
-    }
+    private LinkedListTabulatedFunction getTestList() { return new LinkedListTabulatedFunction(valuesX, valuesYForList); }
 
     @Test
     public void testGetFactory() {
-        assertTrue(service.getFactory() instanceof ArrayTabulatedFunctionFactory);
+        assertTrue(serviceArray.getFactory() instanceof ArrayTabulatedFunctionFactory);
         assertTrue(new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory()).getFactory() instanceof LinkedListTabulatedFunctionFactory);
     }
 
     @Test
     public void testSetFactory() {
-        service.setFactory(new LinkedListTabulatedFunctionFactory());
-        assertTrue(service.getFactory() instanceof LinkedListTabulatedFunctionFactory);
+        serviceArray.setFactory(new LinkedListTabulatedFunctionFactory());
+        assertTrue(serviceArray.getFactory() instanceof LinkedListTabulatedFunctionFactory);
     }
 
     @Test
     public void testAsPoints() {
         TabulatedFunction testArrayFunction = getTestArray();
-        Point[] Points = service.asPoints(testArrayFunction);
+        Point[] Points = serviceArray.asPoints(testArrayFunction);
         int i = 0;
         for (Point myPoint : Points) {
             assertEquals(myPoint.x, testArrayFunction.getX(i), DELTA);
@@ -59,23 +59,37 @@ public class TabulatedFunctionOperationServiceTest { // Доделать эти 
 
     @Test
     public void testSum() {
+
+        final double[] xValuesErr1 = new double[]{-3, -2, -1, 0, 1, 2};
+        final double[] yValuesErr1 = new double[]{-9, -4, -1, 0, 1, 4};
+        TabulatedFunction errorTest1 = new ArrayTabulatedFunction(xValuesErr1, yValuesErr1);
+        assertThrows(InconsistentFunctionsException.class, () -> serviceList.sum(getTestList(), errorTest1));
+
+        final double[] xValuesErr2 = new double[]{-4, -2, -1, 0, 1, 2, 3};
+        TabulatedFunction errorTest2 = new ArrayTabulatedFunction(xValuesErr2, valuesY);
+        assertThrows(InconsistentFunctionsException.class, () -> serviceList.sum(getTestList(), errorTest2));
+
+
         TabulatedFunction testArrayFunction = getTestArray();
         TabulatedFunction testListFunction = getTestList();
-        TabulatedFunction testSumOfArrays = service.sum(testArrayFunction, testArrayFunction);
+        TabulatedFunction testSumOfArrays = serviceArray.sum(testArrayFunction, testArrayFunction);
+        assertTrue(testSumOfArrays instanceof ArrayTabulatedFunction);
         int i = 0;
         for (Point point : testSumOfArrays) {
             assertEquals(point.x, valuesX[i]);
             assertEquals(point.y, valuesY[i] + valuesY[i++]);
         }
 
-        TabulatedFunction testSumOfLists = service.sum(testListFunction, testListFunction);
+        TabulatedFunction testSumOfLists = serviceList.sum(testListFunction, testListFunction);
+        assertTrue(testSumOfLists instanceof LinkedListTabulatedFunction);
         i = 0;
         for (Point point : testSumOfLists) {
             assertEquals(point.x, valuesX[i]);
             assertEquals(point.y, valuesYForList[i] + valuesYForList[i++]);
         }
 
-        TabulatedFunction testSumOfArrayAndList = service.sum(testArrayFunction, testListFunction);
+        TabulatedFunction testSumOfArrayAndList = serviceArray.sum(testArrayFunction, testListFunction);
+        assertTrue(testSumOfArrayAndList instanceof ArrayTabulatedFunction);
         i = 0;
         for (Point point : testSumOfArrayAndList) {
             assertEquals(point.x, valuesX[i]);
@@ -111,7 +125,7 @@ public class TabulatedFunctionOperationServiceTest { // Доделать эти 
         }
     }
 
-    @Test
+    /*@Test
     public void testMultiplication() {
         TabulatedFunction testArrayFunction = getTestArray();
         TabulatedFunction testListFunction = getTestList();
@@ -163,5 +177,5 @@ public class TabulatedFunctionOperationServiceTest { // Доделать эти 
             assertEquals(point.x, valuesX[i]);
             assertEquals(point.y, valuesY[i] / valuesYForList[i++]);
         }
-    }
+    } */
 }
