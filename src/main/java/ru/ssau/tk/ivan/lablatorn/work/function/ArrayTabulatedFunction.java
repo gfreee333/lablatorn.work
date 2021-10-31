@@ -14,7 +14,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2) {
-            throw new IndexOutOfBoundsException("Length less than 2 point");
+            throw new IllegalArgumentException("Length less than 2 point");
         }
 
         super.checkLengthIsTheSame(xValues, yValues);
