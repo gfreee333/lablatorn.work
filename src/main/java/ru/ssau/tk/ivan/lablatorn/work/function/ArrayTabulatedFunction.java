@@ -2,12 +2,14 @@ package ru.ssau.tk.ivan.lablatorn.work.function;
 
 import ru.ssau.tk.ivan.lablatorn.work.exceptions.InterpolationException;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
 
+    private static final long serialVersionUID = 778760480628890616L;
     private final double[] xValues;
     private final double[] yValues;
     private final int count;
