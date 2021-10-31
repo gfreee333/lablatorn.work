@@ -14,24 +14,26 @@ public final class FunctionsIO {
         throw new UnsupportedOperationException();
     }
 
-    static void writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function) {
+    public static void writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function) {
         PrintWriter printWriter = new PrintWriter(writer);
         printWriter.println(function.getCount());
-        for(Point point : function) {
+        for (Point point : function) {
             printWriter.printf("%f %f\n", point.x, point.y);
         }
         printWriter.flush();
     }
-   static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
-       DataOutputStream output = new DataOutputStream(outputStream);
-       output.writeInt(function.getCount());
-       for(Point point: function){
-           output.writeDouble(point.x);
-           output.writeDouble(point.y);
-       }
-       output.flush();
-   }
-   static TabulatedFunction readTabulatedFunction(BufferedReader reader, TabulatedFunctionFactory factory) throws IOException {
+
+    public static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
+        DataOutputStream output = new DataOutputStream(outputStream);
+        output.writeInt(function.getCount());
+        for (Point point : function) {
+            output.writeDouble(point.x);
+            output.writeDouble(point.y);
+        }
+        output.flush();
+    }
+
+    public static TabulatedFunction readTabulatedFunction(BufferedReader reader, TabulatedFunctionFactory factory) throws IOException {
         int count = Integer.parseInt(reader.readLine());
         double[] xValues = new double[count];
         double[] yValues = new double[count];
@@ -46,5 +48,17 @@ public final class FunctionsIO {
             }
         }
         return factory.create(xValues, yValues);
-   }
+    }
+
+    public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException {
+        DataInputStream in = new DataInputStream(inputStream);
+        int count = in.readInt();
+        double[] xValues = new double[count];
+        double[] yValues = new double[count];
+        for (int i = 0; i < count; i++) {
+            xValues[i] = in.readDouble();
+            yValues[i] = in.readDouble();
+        }
+        return factory.create(xValues, yValues);
+    }
 }
