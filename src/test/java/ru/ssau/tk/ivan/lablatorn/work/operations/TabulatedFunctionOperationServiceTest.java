@@ -44,7 +44,7 @@ public class TabulatedFunctionOperationServiceTest { // Доделать эти 
     @Test
     public void testAsPoints() {
         TabulatedFunction testArrayFunction = getTestArray();
-        Point[] Points = serviceArray.asPoints(testArrayFunction);
+        Point[] Points = serviceArray.asPoints(testArrayFunction); // some coomment
         int i = 0;
         for (Point myPoint : Points) {
             assertEquals(myPoint.x, testArrayFunction.getX(i), DELTA);
