@@ -15,7 +15,7 @@ public class TabulatedFunctionOperationServiceTest { // Доделать эти 
     private final double[] valuesX = new double[]{-5, -4, -3, 6, 8, 10, 27};
     private final double[] valuesY = new double[]{-33, -22, -1, 0, 21, 25, 30};
     private final double[] valuesYForList = new double[]{1, 2, 3, 4, 5, 6, 7};
-    private final TabulatedFunctionOperationService serviceArray = new TabulatedFunctionOperationService();
+    private final TabulatedFunctionOperationService serviceArray = new TabulatedFunctionOperationService(new ArrayTabulatedFunctionFactory());
     private final TabulatedFunctionOperationService serviceList = new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory());
     private final double DELTA = 0.0001;
 
@@ -29,14 +29,16 @@ public class TabulatedFunctionOperationServiceTest { // Доделать эти 
 
     @Test
     public void testGetFactory() {
-        assertTrue(serviceArray.getFactory() instanceof ArrayTabulatedFunctionFactory);
+        TabulatedFunctionOperationService serviceArrayNew = new TabulatedFunctionOperationService((new ArrayTabulatedFunctionFactory()));
+        assertTrue(serviceArrayNew.getFactory() instanceof ArrayTabulatedFunctionFactory);
         assertTrue(new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory()).getFactory() instanceof LinkedListTabulatedFunctionFactory);
     }
 
     @Test
     public void testSetFactory() {
-        serviceArray.setFactory(new LinkedListTabulatedFunctionFactory());
-        assertTrue(serviceArray.getFactory() instanceof LinkedListTabulatedFunctionFactory);
+        TabulatedFunctionOperationService serviceArrayNew = new TabulatedFunctionOperationService((new ArrayTabulatedFunctionFactory()));
+        serviceArrayNew.setFactory(new LinkedListTabulatedFunctionFactory());
+        assertTrue(serviceArrayNew.getFactory() instanceof LinkedListTabulatedFunctionFactory);
     }
 
     @Test
@@ -69,7 +71,7 @@ public class TabulatedFunctionOperationServiceTest { // Доделать эти 
 
         final double[] xValuesErr2 = new double[]{-4, -2, -1, 0, 1, 2, 3};
         TabulatedFunction errorTest2 = new ArrayTabulatedFunction(xValuesErr2, valuesY);
-        assertThrows(InconsistentFunctionsException.class, () -> serviceList.sum(getTestList(), errorTest2));
+        assertThrows(InconsistentFunctionsException.class, () -> serviceArray.sum(getTestArray(), errorTest2));
 
 
         TabulatedFunction testArrayFunction = getTestArray();
@@ -86,7 +88,7 @@ public class TabulatedFunctionOperationServiceTest { // Доделать эти 
         assertTrue(testSumOfLists instanceof LinkedListTabulatedFunction);
         i = 0;
         for (Point point : testSumOfLists) {
-            assertEquals(point.x, valuesX[i]);
+            assertEquals(point.x, valuesX[i]); // test
             assertEquals(point.y, valuesYForList[i] + valuesYForList[i++]);
         }
 
@@ -102,14 +104,14 @@ public class TabulatedFunctionOperationServiceTest { // Доделать эти 
 
     @Test
     public void testSubtract() {
-        final double[] xValuesErr1 = new double[]{-25, -5, -1, 0, 1, 2};
-        final double[] yValuesErr1 = new double[]{-100, -55, -14, 0, 12, 44};
-        TabulatedFunction errorTest1 = new ArrayTabulatedFunction(xValuesErr1, yValuesErr1);
+        final double[] xValuesErr0 = new double[]{-25, -5, -1, 0, 1, 2};
+        final double[] yValuesErr = new double[]{-100, -55, -14, 0, 12, 44};
+        TabulatedFunction errorTest1 = new ArrayTabulatedFunction(xValuesErr0, yValuesErr);
         assertThrows(InconsistentFunctionsException.class, () -> serviceList.subtract(getTestList(), errorTest1));
 
-        final double[] xValuesErr2 = new double[]{-4, -2, -1, 0, 1, 2, 3};
-        TabulatedFunction errorTest2 = new ArrayTabulatedFunction(xValuesErr2, valuesY);
-        assertThrows(InconsistentFunctionsException.class, () -> serviceList.subtract(getTestList(), errorTest2));
+        final double[] xValuesErr = new double[]{-4, -2, -1, 0, 1, 2, 3};
+        TabulatedFunction errorTest2 = new ArrayTabulatedFunction(xValuesErr, valuesY);
+        assertThrows(InconsistentFunctionsException.class, () -> serviceArray.subtract(getTestArray(), errorTest2));
 
         TabulatedFunction testArrayFunction = getTestArray();
         TabulatedFunction testListFunction = getTestList();
