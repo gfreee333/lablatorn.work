@@ -8,6 +8,7 @@ import ru.ssau.tk.ivan.lablatorn.work.function.factory.ArrayTabulatedFunctionFac
 import ru.ssau.tk.ivan.lablatorn.work.function.factory.LinkedListTabulatedFunctionFactory;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class TabulatedDifferentialOperatorTest {
 
@@ -16,12 +17,14 @@ public class TabulatedDifferentialOperatorTest {
         TabulatedFunction testList = new LinkedListTabulatedFunction(new double[]{1, 2, 3, 4}, new double[]{1, 4, 9, 16});
         TabulatedDifferentialOperator differentialListOperator = new TabulatedDifferentialOperator(new LinkedListTabulatedFunctionFactory());
         testList = differentialListOperator.derive(testList);
+        assertTrue(testList instanceof LinkedListTabulatedFunction);
         assertEquals(testList.getY(0), 3, 0.0001);
         assertEquals(testList.getY(1), 5, 0.0001);
         assertEquals(testList.getY(3), 7, 0.0001);
         TabulatedFunction testArray = new ArrayTabulatedFunction(new double[]{1, 2, 3, 4}, new double[]{1, 2, 3, 4});
         TabulatedDifferentialOperator differentialArrayOperator = new TabulatedDifferentialOperator(new ArrayTabulatedFunctionFactory());
         testArray = differentialArrayOperator.derive(testArray);
+        assertTrue(testArray instanceof ArrayTabulatedFunction);
         assertEquals(testArray.getX(3), 4, 0.0001);
         assertEquals(testArray.getY(2), 1, 0.0001);
         assertEquals(testArray.getY(3), 1, 0.0001);
