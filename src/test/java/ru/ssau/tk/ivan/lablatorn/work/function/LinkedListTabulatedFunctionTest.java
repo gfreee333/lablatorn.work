@@ -56,6 +56,7 @@ public class LinkedListTabulatedFunctionTest {
     public void testArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(xValues1, yValues1));
         assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(sqr, 10, -1, 5));
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(sqr, -1, 10, 1));
     }
 
     @Test
