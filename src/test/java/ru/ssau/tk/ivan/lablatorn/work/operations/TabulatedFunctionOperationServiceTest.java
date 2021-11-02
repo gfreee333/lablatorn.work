@@ -44,17 +44,17 @@ public class TabulatedFunctionOperationServiceTest { // Доделать эти 
     @Test
     public void testAsPoints() {
         TabulatedFunction testArrayFunction = getTestArray();
-        Point[] Points = serviceArray.asPoints(testArrayFunction); // some coomment
+        Point[] points = serviceArray.asPoints(testArrayFunction); // some coomment
         int i = 0;
-        for (Point myPoint : Points) {
+        for (Point myPoint : points) {
             assertEquals(myPoint.x, testArrayFunction.getX(i), DELTA);
             assertEquals(myPoint.y, testArrayFunction.getY(i++), DELTA);
         }
         assertEquals(testArrayFunction.getCount(), i);
         TabulatedFunction testListFunction = getTestList();
-        Points = TabulatedFunctionOperationService.asPoints(testListFunction);
+        points = TabulatedFunctionOperationService.asPoints(testListFunction);
         i = 0;
-        for (Point myPoint : Points) {
+        for (Point myPoint : points) {
             assertEquals(myPoint.x, testListFunction.getX(i), DELTA);
             assertEquals(myPoint.y, testListFunction.getY(i++), DELTA);
         }
