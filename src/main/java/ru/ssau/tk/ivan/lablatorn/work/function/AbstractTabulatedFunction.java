@@ -17,13 +17,13 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
         return leftY + (rightY - leftY) * (x - leftX) / (rightX - leftX);
     }
 
-    protected static void checkLengthIsTheSame(double[] xValues, double[] yValues) throws DifferentLengthOfArraysException {
+    protected static void checkLengthIsTheSame(double[] xValues, double[] yValues) {
         if (xValues.length != yValues.length) {
             throw new DifferentLengthOfArraysException();
         }
     }
 
-    protected static void checkSorted(double[] array) throws ArrayIsNotSortedException {
+    protected static void checkSorted(double[] array) {
         for (int i = 1; i < array.length; i++) {
             if (array[i - 1] > array[i]) {
                 throw new ArrayIsNotSortedException();
