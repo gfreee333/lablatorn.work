@@ -25,7 +25,7 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
 
     protected static void checkSorted(double[] array) {
         for (int i = 1; i < array.length; i++) {
-            if (array[i - 1] > array[i]) {
+            if (array[i - 1] >= array[i]) {
                 throw new ArrayIsNotSortedException();
             }
         }
