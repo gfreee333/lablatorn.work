@@ -47,6 +47,13 @@ public class ArrayTabulatedFunctionTest {
     }
 
     @Test
+    public void testSecondConstructorExeptions() {
+        TabulatedFunction arrayFunction = new ArrayTabulatedFunction(sqr, 10.0, -1.0, 100);
+        assertThrows(IndexOutOfBoundsException.class, () -> new ArrayTabulatedFunction(sqr, 10.0, -1.0, 100));
+        assertThrows(IndexOutOfBoundsException.class, () -> new ArrayTabulatedFunction(sqr, -1, 10, 1));
+    }
+
+    @Test
     public void ArrayTabulatedFunction() {
         assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(xValuesWrong1, yValuesWrong1));
         assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(xValuesWrong2, yValuesWrong1));
