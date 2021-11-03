@@ -12,7 +12,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     private Node head;
     private int count;
 
-    protected static class Node implements Serializable{
+    protected static class Node implements Serializable {
         private static final long serialVersionUID = 2454339048853671877L;
         double x;
         double y;
@@ -81,27 +81,27 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return head.prev.x;
     }
 
-    private Node getNode(int index) throws UnsupportedOperationException{
+    private Node getNode(int index) throws UnsupportedOperationException {
         checkIndex(index);
-            Node indexNode;
-            if (index <= (count / 2)) {
-                indexNode = head;
-                for (int i = 0; i < count; i++) {
-                    if (i == index) {
-                        return indexNode;
-                    }
-                    indexNode = indexNode.next;
+        Node indexNode;
+        if (index <= (count / 2)) {
+            indexNode = head;
+            for (int i = 0; i < count; i++) {
+                if (i == index) {
+                    return indexNode;
                 }
-            } else {
-                indexNode = head.prev;
-                for (int i = count - 1; i > 0; i--) {
-                    if (i == index) {
-                        return indexNode;
-                    }
-                    indexNode = indexNode.prev;
-                }
+                indexNode = indexNode.next;
             }
-        return null;
+        } else {
+            indexNode = head.prev;
+            for (int i = count - 1; i > 0; i--) {
+                if (i == index) {
+                    return indexNode;
+                }
+                indexNode = indexNode.prev;
+            }
+        }
+        return indexNode;
     }
 
     @Override
