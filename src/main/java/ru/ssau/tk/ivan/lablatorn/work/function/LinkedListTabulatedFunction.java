@@ -81,7 +81,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return head.prev.x;
     }
 
-    private Node getNode(int index) throws UnsupportedOperationException {
+    private Node getNode(int index) {
         checkIndex(index);
         Node indexNode;
         if (index <= (count / 2)) {
@@ -101,7 +101,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
                 indexNode = indexNode.prev;
             }
         }
-        return indexNode;
+        throw new UnsupportedOperationException();
     }
 
     @Override
