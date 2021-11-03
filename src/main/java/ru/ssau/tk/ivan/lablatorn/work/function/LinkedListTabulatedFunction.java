@@ -101,7 +101,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
                 indexNode = indexNode.prev;
             }
         }
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("");
     }
 
     @Override
