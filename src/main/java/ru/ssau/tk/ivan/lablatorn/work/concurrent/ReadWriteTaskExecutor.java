@@ -19,6 +19,5 @@ public class ReadWriteTaskExecutor {
         }
         Thread.sleep(2_000);
         System.out.println(function.toString());
-
     }
 }

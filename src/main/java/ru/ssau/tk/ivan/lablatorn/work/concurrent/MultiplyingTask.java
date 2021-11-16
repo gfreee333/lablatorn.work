@@ -4,7 +4,7 @@ import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
 
 public class MultiplyingTask implements Runnable {
 
-    TabulatedFunction function;
+    private final TabulatedFunction function;
 
     public MultiplyingTask(TabulatedFunction function) {
         this.function = function;
@@ -14,7 +14,7 @@ public class MultiplyingTask implements Runnable {
     public void run() {
         double x;
         double y;
-        for(int i = 0; i < function.getCount(); i++) {
+        for (int i = 0; i < function.getCount(); i++) {
             x = function.getX(i);
             synchronized (function) {
                 y = function.getY(i);
