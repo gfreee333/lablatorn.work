@@ -17,6 +17,16 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
         this.mutex = Objects.requireNonNull(mutex);
     }
 
+    public interface Operation<T> {
+        T apply(SynchronizedTabulatedFunction synchronizedTabulatedFunction);
+    }
+
+    public <T> T doSynchronously(Operation<? extends T> operation) {
+        synchronized (mutex) {
+            return operation.apply(this);
+        }
+    }
+
     @Override
     public int getCount() {
         synchronized (mutex) {
