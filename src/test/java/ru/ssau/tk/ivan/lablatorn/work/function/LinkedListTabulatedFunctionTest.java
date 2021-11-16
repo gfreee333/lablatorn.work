@@ -50,6 +50,7 @@ public class LinkedListTabulatedFunctionTest {
     public void testLinkedListTabulatedFunction() {
         assertThrows(DifferentLengthOfArraysException.class, () -> new LinkedListTabulatedFunction(xValuesWrong2, yValuesWrong1));
         assertThrows(ArrayIsNotSortedException.class, () -> new LinkedListTabulatedFunction(xValuesWrong1, yValuesWrong1));
+        assertThrows(IllegalArgumentException.class,()-> new LinkedListTabulatedFunction(xValues1,yValues));
     }
 
     @Test
