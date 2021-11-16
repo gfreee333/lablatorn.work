@@ -5,9 +5,11 @@ import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
 public class AddingTask implements Runnable {
 
     private final TabulatedFunction function;
+    private final Runnable postRunAction;
 
-    public AddingTask(TabulatedFunction function) {
+    public AddingTask(TabulatedFunction function, Runnable postRunAction) {
         this.function = function;
+        this.postRunAction = postRunAction;
     }
 
     @Override
@@ -26,6 +28,8 @@ public class AddingTask implements Runnable {
             System.out.printf("%s, i = %d, x = %f, new y = %f", Thread.currentThread().getName(), i, x, y);
             System.out.println();
         }
-
+        if(postRunAction != null) {
+            postRunAction.run();
+        }
     }
 }
