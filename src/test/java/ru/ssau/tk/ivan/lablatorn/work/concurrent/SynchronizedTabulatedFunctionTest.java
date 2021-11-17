@@ -19,11 +19,11 @@ public class SynchronizedTabulatedFunctionTest {
     private final Object mutex = new Object();
 
     private SynchronizedTabulatedFunction getSynchronizedList() {
-        return new SynchronizedTabulatedFunction(new LinkedListTabulatedFunction(xValues, yValues), mutex);
+        return new SynchronizedTabulatedFunction(new LinkedListTabulatedFunction(xValues, yValues));
     }
 
     private SynchronizedTabulatedFunction getSynchronizedArray() {
-        return new SynchronizedTabulatedFunction(new ArrayTabulatedFunction(xValues, yValues), mutex);
+        return new SynchronizedTabulatedFunction(new ArrayTabulatedFunction(xValues, yValues));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class SynchronizedTabulatedFunctionTest {
     @Test
     public void testSetY() {
         ZeroFunction source = new ZeroFunction();
-        SynchronizedTabulatedFunction checkFunction = new SynchronizedTabulatedFunction(new LinkedListTabulatedFunction(source, 1, 16, 8), mutex);
+        SynchronizedTabulatedFunction checkFunction = new SynchronizedTabulatedFunction(new LinkedListTabulatedFunction(source, 1, 16, 8));
         checkFunction.setY(0, 2);
         assertEquals(checkFunction.getY(0), 2, DELTA);
         checkFunction.setY(1, 3);

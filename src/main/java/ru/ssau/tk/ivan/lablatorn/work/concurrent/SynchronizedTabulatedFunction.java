@@ -9,12 +9,12 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SynchronizedTabulatedFunction implements TabulatedFunction {
-    final Object mutex;
+
     TabulatedFunction tabulatedFunction;
 
-    public SynchronizedTabulatedFunction(TabulatedFunction tabulatedFunction, Object mutex) {
+    public SynchronizedTabulatedFunction(TabulatedFunction tabulatedFunction) {
         this.tabulatedFunction = tabulatedFunction;
-        this.mutex = Objects.requireNonNull(mutex);
+
     }
 
     public interface Operation<T> {
@@ -22,70 +22,70 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
     }
 
     public <T> T doSynchronously(Operation<? extends T> operation) {
-        synchronized (mutex) {
+        synchronized (operation) {
             return operation.apply(this);
         }
     }
 
     @Override
     public int getCount() {
-        synchronized (mutex) {
+        synchronized (tabulatedFunction) {
             return tabulatedFunction.getCount();
         }
     }
 
     @Override
     public double getX(int Index) {
-        synchronized (mutex) {
+        synchronized (tabulatedFunction) {
             return tabulatedFunction.getX(Index);
         }
     }
 
     @Override
     public double getY(int index) {
-        synchronized (mutex) {
+        synchronized (tabulatedFunction) {
             return tabulatedFunction.getY(index);
         }
     }
 
     @Override
     public void setY(int index, double value) {
-        synchronized (mutex) {
+        synchronized (tabulatedFunction) {
             tabulatedFunction.setY(index, value);
         }
     }
 
     @Override
     public int indexOfX(double x) {
-        synchronized (mutex) {
+        synchronized (tabulatedFunction) {
             return tabulatedFunction.indexOfX(x);
         }
     }
 
     @Override
     public int indexOfY(double y) {
-        synchronized (mutex) {
+        synchronized (tabulatedFunction) {
             return tabulatedFunction.indexOfY(y);
         }
     }
 
     @Override
     public double leftBound() {
-        synchronized (mutex) {
+        synchronized (tabulatedFunction) {
             return tabulatedFunction.leftBound();
         }
     }
 
     @Override
     public double rightBound() {
-        synchronized (mutex) {
+        synchronized (tabulatedFunction) {
             return tabulatedFunction.rightBound();
         }
     }
 
     @Override
     public Iterator<Point> iterator() {
-        synchronized (mutex) {
+        synchronized (tabulatedFunction) {
             Point[] points = TabulatedFunctionOperationService.asPoints(tabulatedFunction);
             return new Iterator<>() {
                 int i = 0;
@@ -108,7 +108,7 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
 
     @Override
     public double apply(double x) {
-        synchronized (mutex) {
+        synchronized (tabulatedFunction) {
             return tabulatedFunction.apply(x);
         }
     }
