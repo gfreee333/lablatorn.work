@@ -6,11 +6,10 @@ import ru.ssau.tk.ivan.lablatorn.work.operations.TabulatedFunctionOperationServi
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 public class SynchronizedTabulatedFunction implements TabulatedFunction {
 
-    TabulatedFunction tabulatedFunction;
+    final TabulatedFunction tabulatedFunction;
 
     public SynchronizedTabulatedFunction(TabulatedFunction tabulatedFunction) {
         this.tabulatedFunction = tabulatedFunction;
@@ -22,7 +21,7 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
     }
 
     public <T> T doSynchronously(Operation<? extends T> operation) {
-        synchronized (operation) {
+        synchronized (this) {
             return operation.apply(this);
         }
     }

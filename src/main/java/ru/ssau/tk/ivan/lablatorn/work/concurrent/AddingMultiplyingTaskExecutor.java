@@ -11,7 +11,7 @@ public class AddingMultiplyingTaskExecutor {
     public static void main(String[] args) throws InterruptedException {
 
         TabulatedFunction function = new LinkedListTabulatedFunction(new ConstantFunction(2), 1, 100, 100);
-        CountDownLatch pause = new CountDownLatch(2);
+        CountDownLatch pause = new CountDownLatch(3);
 
         Thread thread1 = new Thread(new MultiplyingTask(function, pause::countDown));
         Thread thread2 = new Thread(new MultiplyingTask(function, pause::countDown));
