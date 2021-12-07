@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 public class SynchronizedTabulatedFunction implements TabulatedFunction {
 
     final TabulatedFunction tabulatedFunction;
+    private Object mutex = new Object();
 
     public SynchronizedTabulatedFunction(TabulatedFunction tabulatedFunction) {
         this.tabulatedFunction = tabulatedFunction;
@@ -21,7 +22,7 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
     }
 
     public <T> T doSynchronously(Operation<? extends T> operation) {
-        synchronized (this) {
+        synchronized (mutex) {
             return operation.apply(this);
         }
     }
