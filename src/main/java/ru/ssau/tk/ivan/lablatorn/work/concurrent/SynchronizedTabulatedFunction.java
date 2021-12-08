@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 
 public class SynchronizedTabulatedFunction implements TabulatedFunction {
 
-    final TabulatedFunction tabulatedFunction;
+    private final TabulatedFunction tabulatedFunction;
 
     public SynchronizedTabulatedFunction(TabulatedFunction tabulatedFunction) {
         this.tabulatedFunction = tabulatedFunction;
