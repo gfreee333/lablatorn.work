@@ -1,174 +1,139 @@
 package ru.ssau.tk.ivan.lablatorn.work.ui;
 
-import ru.ssau.tk.ivan.lablatorn.work.function.TabulatedFunction;
-import ru.ssau.tk.ivan.lablatorn.work.operations.TabulatedDifferentialOperator;
+import ru.ssau.tk.ivan.lablatorn.work.function.*;
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
 
-public class Differentiation extends JDialog {
-    //Таблица результата
-    private final java.util.List<String> xValuesResult = new ArrayList<>(0);
-    private final List<String> yValuesResult = new ArrayList<>(0);
-    private final AbstractTableModel tableModelResult = new EditableTable(xValuesResult, yValuesResult, false);
-    private final JTable tableResult = new JTable(tableModelResult);
-    private final java.util.List<String> xValuesInitial = new ArrayList<>();
-    private final List<String> yValuesInitial = new ArrayList<>();
-    private final AbstractTableModel tableModelInitial = new EditableTable(xValuesInitial, yValuesInitial, true);
-    private final JTable tableInitial = new JTable(tableModelInitial);
+public class CreatingTFThroughFunction extends JDialog {
+    //Count
+    private final JLabel labelCount = new JLabel("Количество точек: ");
+    private final JTextField textFieldCount = new JTextField(2);
+    //From - To
+    private final JLabel labelInterval = new JLabel("Интервал: ");
+    private final JLabel labelBracket1 = new JLabel("[ ");
+    private final JLabel labelBracket3 = new JLabel(" ]");
+    private final JLabel labelBracket2 = new JLabel(" ; ");
+    private final JTextField textFieldTo = new JTextField();
+    private final JTextField textFieldFrom = new JTextField();
+    //TF
+    private final JButton buttonCreateFunction = new JButton("Создать функцию");
+    public TabulatedFunction function;
+    protected static JCheckBox checkBoxSave = new JCheckBox("Сохранить функцию");
+    //
+    Map<String, MathFunction> functionMap = new HashMap<>();
+    JComboBox<String> comboBoxFunctions = showComboBox();
 
-    private final JButton button = new JButton("Вычислить..");
-    private final JButton buttonResult = new JButton("Сохранить результат");
-
-    private final JButton buttonCreate = new JButton("Создать..");
-    private final JButton buttonSave = new JButton("Сохранить..");
-    private final JButton buttonDownload = new JButton("Загрузить..");
-
-    private final TabulatedDifferentialOperator differentialOperator = new TabulatedDifferentialOperator(MainWindow.functionFactory);
-
-    protected TabulatedFunction functionResult;
-    protected TabulatedFunction functionInitial;
-
-    protected Differentiation() {
+    protected CreatingTFThroughFunction(Consumer<? super TabulatedFunction> callback) {
         super();
         getContentPane().setLayout(new FlowLayout());
-        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
         setBounds(100, 100, 800, 700);
 
+        getContentPane().add(labelCount);
+        getContentPane().add(textFieldCount);
+
+        getContentPane().add(labelInterval);
+        getContentPane().add(labelBracket1);
+        getContentPane().add(textFieldFrom);
+        getContentPane().add(labelBracket2);
+        getContentPane().add(textFieldTo);
+        getContentPane().add(labelBracket3);
+
+        getContentPane().add(buttonCreateFunction);
+        getContentPane().add(comboBoxFunctions);
+
         compose();
         addButtonListeners();
-
-        CreatingTFThroughArray.checkBoxSave.setVisible(false);
-        CreatingTFThroughFunction.checkBoxSave.setVisible(false);
-        tableInitial.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tableResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setVisible(true);
+
+        callback.accept(function);
+        dispose();
     }
 
     private void addButtonListeners() {
-        //создание функции
-        buttonCreate.addActionListener(e -> {
-            Object[] buttonsName = {"Массив", "Функция", "Отмена"};
-            int resultDialog = JOptionPane.showOptionDialog(new JFrame(), "Как вы хотите создать функцию?",
-                    "Создать..", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-                    null, buttonsName, buttonsName[2]);
-            xValuesInitial.clear();
-            yValuesInitial.clear();
+        buttonCreateFunction.addActionListener(
+                e -> {
+                    int count = Integer.parseInt(textFieldCount.getText());
+                    double from = Double.parseDouble(textFieldFrom.getText());
+                    double to = Double.parseDouble(textFieldTo.getText());
+                    String str = comboBoxFunctions.getItemAt(comboBoxFunctions.getSelectedIndex());
+                    if (str.equals("Константная функция")) {
+                        String result = JOptionPane.showInputDialog("Введите значение константы");
+                        double constant = Double.parseDouble(result);
+                        function = MainWindow.functionFactory.create(new ConstantFunction(constant), from, to, count);
+                    } else {
+                        MathFunction mathFunction = functionMap.get(str);
 
-            xValuesResult.clear();
-            yValuesResult.clear();
-
-            switch (resultDialog) {
-                case 0:
-                    new CreatingTFThroughArray(function -> functionInitial = function);
-                    break;
-                case 1:
-                    new CreatingTFThroughFunction(function -> functionInitial = function);
-                    break;
-            }
-
-            for (int i = 0; i < functionInitial.getCount(); i++) {
-                xValuesInitial.add(i, String.valueOf(functionInitial.getX(i)));
-                yValuesInitial.add(i, String.valueOf(functionInitial.getY(i)));
-
-                tableModelInitial.fireTableDataChanged();
-            }
-        });
-
-        //подсчет и вывод результата
-        button.addActionListener(e -> {
-            //заменить измененные значения функции
-            tableInitial.clearSelection();
-            xValuesResult.clear();
-            yValuesResult.clear();
-
-            double[] arrayX = convert(xValuesInitial);
-            double[] arrayY = convert(yValuesInitial);
-
-            //подсчет производной и вставка в таблицу
-            functionResult = differentialOperator.derive(MainWindow.functionFactory.create(arrayX, arrayY));
-            for (int i = 0; i < functionResult.getCount(); i++) {
-                xValuesResult.add(i, String.valueOf(functionResult.getX(i)));
-                yValuesResult.add(i, String.valueOf(functionResult.getY(i)));
-
-                tableModelResult.fireTableDataChanged();
-            }
-        });
-
-        buttonSave.addActionListener(e -> {
-            //save
-        });
-        buttonDownload.addActionListener(e -> {
-            //Download
-        });
+                        function = MainWindow.functionFactory.create(mathFunction, from, to, count);
+                    }
+                    dispose();
+                    System.out.println(function.toString());
+                }
+        );
     }
 
     private void compose() {
-        JPanel panelResult = new JPanel();
-        GroupLayout layoutResult = new GroupLayout(panelResult);
-        panelResult.setLayout(layoutResult);
-        layoutResult.setAutoCreateGaps(true);
-        layoutResult.setAutoCreateContainerGaps(true);
-        JScrollPane scrollPaneResult = new JScrollPane(tableResult);
-        layoutResult.setHorizontalGroup(
-                layoutResult.createParallelGroup(GroupLayout.Alignment.CENTER)
-                        .addGroup(layoutResult.createSequentialGroup()
-                                .addComponent(buttonResult)
-                                .addComponent(button))
-                        .addComponent(scrollPaneResult));
-
-        layoutResult.setVerticalGroup(layoutResult.createSequentialGroup()
-                .addGroup(layoutResult.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(buttonResult)
-                        .addComponent(button))
-                .addComponent(scrollPaneResult));
-
-
-        JPanel panelInitial = new JPanel();
-        GroupLayout layoutInitial = new GroupLayout(panelInitial);
-        panelInitial.setLayout(layoutInitial);
-        layoutInitial.setAutoCreateGaps(true);
-        layoutInitial.setAutoCreateContainerGaps(true);
-        JScrollPane scrollPaneInitial = new JScrollPane(tableInitial);
-        layoutInitial.setHorizontalGroup(
-                layoutInitial.createParallelGroup(GroupLayout.Alignment.CENTER)
-                        .addGroup(layoutInitial.createSequentialGroup()
-                                .addComponent(buttonCreate)
-                                .addComponent(buttonDownload)
-                                .addComponent(buttonSave))
-                        .addComponent(scrollPaneInitial));
-        layoutInitial.setVerticalGroup(layoutInitial.createSequentialGroup()
-                .addGroup(layoutInitial.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(buttonCreate)
-                        .addComponent(buttonDownload)
-                        .addComponent(buttonSave))
-                .addComponent(scrollPaneInitial));
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
-        layout.setHorizontalGroup(layout.createParallelGroup().addGroup(layout.createSequentialGroup()
-                .addComponent(panelInitial)
-                .addComponent(panelResult)));
-        layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup()
-                .addComponent(panelInitial)
-                .addComponent(panelResult)));
+
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelCount)
+                        .addComponent(textFieldCount))
+                .addComponent(labelInterval)
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelBracket1)
+                        .addComponent(textFieldFrom)
+                        .addComponent(labelBracket2)
+                        .addComponent(textFieldTo)
+                        .addComponent(labelBracket3))
+                .addComponent(comboBoxFunctions)
+                .addComponent(checkBoxSave)
+                .addComponent(buttonCreateFunction)
+        );
+
+        layout.setVerticalGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(labelCount)
+                        .addComponent(textFieldCount))
+                .addComponent(labelInterval)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(labelBracket1)
+                        .addComponent(textFieldFrom)
+                        .addComponent(labelBracket2)
+                        .addComponent(textFieldTo)
+                        .addComponent(labelBracket3))
+                .addComponent(comboBoxFunctions)
+                .addComponent(checkBoxSave)
+                .addComponent(buttonCreateFunction));
+
         getContentPane().setBackground(Settings.color);
-        panelInitial.setBackground(Settings.color);
-        panelResult.setBackground(Settings.color);
+        checkBoxSave.setBackground(Settings.color);
+        comboBoxFunctions.setBackground(Settings.color.brighter());
     }
 
-    private double[] convert(List<String> values) {
-        double[] array = new double[values.size()];
-        for (int i = 0; i < values.size(); i++) {
-            String num = values.get(i);
-            array[i] = Double.parseDouble(num);
-        }
-        return array;
+    private JComboBox<String> showComboBox() {
+        functionMap.put("Квадратичная функция", new SqrFunction());
+        functionMap.put("Константная функция", new ConstantFunction(15));
+        functionMap.put("Логарифмическая функция", new LnFunction());
+        functionMap.put("Тождественная функция", new IdentityFunction());
+        functionMap.put("Функция кубического корня", new ThreeRootFunction());
 
+        DefaultComboBoxModel<String> functions = new DefaultComboBoxModel<>();
+
+        functions.addElement("Квадратичная функция");
+        functions.addElement("Константная функция");
+        functions.addElement("Логарифмическая функция");
+        functions.addElement("Тождественная функция");
+        functions.addElement("Функция кубического корня");
+
+        return new JComboBox<>(functions);
     }
 }

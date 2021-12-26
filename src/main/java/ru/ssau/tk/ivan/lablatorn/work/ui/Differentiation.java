@@ -15,6 +15,7 @@ public class Differentiation extends JDialog {
     private final List<String> yValuesResult = new ArrayList<>(0);
     private final AbstractTableModel tableModelResult = new EditableTable(xValuesResult, yValuesResult, false);
     private final JTable tableResult = new JTable(tableModelResult);
+
     private final java.util.List<String> xValuesInitial = new ArrayList<>();
     private final List<String> yValuesInitial = new ArrayList<>();
     private final AbstractTableModel tableModelInitial = new EditableTable(xValuesInitial, yValuesInitial, true);
@@ -44,8 +45,10 @@ public class Differentiation extends JDialog {
 
         CreatingTFThroughArray.checkBoxSave.setVisible(false);
         CreatingTFThroughFunction.checkBoxSave.setVisible(false);
+
         tableInitial.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         setVisible(true);
     }
 
@@ -102,6 +105,7 @@ public class Differentiation extends JDialog {
         buttonSave.addActionListener(e -> {
             //save
         });
+
         buttonDownload.addActionListener(e -> {
             //Download
         });
@@ -113,6 +117,7 @@ public class Differentiation extends JDialog {
         panelResult.setLayout(layoutResult);
         layoutResult.setAutoCreateGaps(true);
         layoutResult.setAutoCreateContainerGaps(true);
+
         JScrollPane scrollPaneResult = new JScrollPane(tableResult);
         layoutResult.setHorizontalGroup(
                 layoutResult.createParallelGroup(GroupLayout.Alignment.CENTER)
@@ -133,6 +138,7 @@ public class Differentiation extends JDialog {
         panelInitial.setLayout(layoutInitial);
         layoutInitial.setAutoCreateGaps(true);
         layoutInitial.setAutoCreateContainerGaps(true);
+
         JScrollPane scrollPaneInitial = new JScrollPane(tableInitial);
         layoutInitial.setHorizontalGroup(
                 layoutInitial.createParallelGroup(GroupLayout.Alignment.CENTER)
@@ -141,22 +147,28 @@ public class Differentiation extends JDialog {
                                 .addComponent(buttonDownload)
                                 .addComponent(buttonSave))
                         .addComponent(scrollPaneInitial));
+
         layoutInitial.setVerticalGroup(layoutInitial.createSequentialGroup()
                 .addGroup(layoutInitial.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(buttonCreate)
                         .addComponent(buttonDownload)
                         .addComponent(buttonSave))
                 .addComponent(scrollPaneInitial));
+
+
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
+
         layout.setHorizontalGroup(layout.createParallelGroup().addGroup(layout.createSequentialGroup()
                 .addComponent(panelInitial)
                 .addComponent(panelResult)));
+
         layout.setVerticalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup()
                 .addComponent(panelInitial)
                 .addComponent(panelResult)));
+
         getContentPane().setBackground(Settings.color);
         panelInitial.setBackground(Settings.color);
         panelResult.setBackground(Settings.color);

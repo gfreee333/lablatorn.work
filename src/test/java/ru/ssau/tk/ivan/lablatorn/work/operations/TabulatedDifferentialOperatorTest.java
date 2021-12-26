@@ -59,7 +59,7 @@ public class TabulatedDifferentialOperatorTest {
         TabulatedDifferentialOperator tabulatedDifferentialOperatorTwo = new TabulatedDifferentialOperator(linkedTabulatedFunctionFactory);
         TabulatedFunction linkedTabulatedAfterDerive = tabulatedDifferentialOperatorTwo.deriveSynchronously(linkedTabulatedFunction);
         TabulatedFunction linkedTabulatedSynchronizedAfterDerive = tabulatedDifferentialOperator.deriveSynchronously(new SynchronizedTabulatedFunction(linkedTabulatedFunction));
-        //Assert.assertTrue(linkedTabulatedSynchronizedAfterDerive instanceof LinkedListTabulatedFunction);
+        Assert.assertTrue(linkedTabulatedSynchronizedAfterDerive instanceof ArrayTabulatedFunction);
         Assert.assertTrue(linkedTabulatedAfterDerive instanceof LinkedListTabulatedFunction);
         for (int element = 0; element < arrayTabulatedFunction.getCount(); element++) {
             Assert.assertEquals(linkedTabulatedFunction.getX(element), (double) element);
