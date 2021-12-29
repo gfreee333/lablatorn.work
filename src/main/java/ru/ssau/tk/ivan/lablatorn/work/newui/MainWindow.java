@@ -46,7 +46,7 @@ public class MainWindow extends JFrame {
         container.add(designButton(operationButton));
         container.add(designButton(differential));
 
-        ImageIcon icon = new ImageIcon(javax.imageio.ImageIO.read((new File("photo_2021-12-26_16-45-34.jpg"))));
+        ImageIcon icon = new ImageIcon(javax.imageio.ImageIO.read((new File("photo_2021-12-29_10-42-49.jpg"))));
         label.setIcon(icon);
         label.setPreferredSize(new Dimension(1, 1));
 
@@ -68,7 +68,7 @@ public class MainWindow extends JFrame {
     }
 
     public void designLabel(JLabel label) {
-        label.setFont(new Font("Consolas", Font.ITALIC + Font.BOLD, 28));
+        label.setFont(new Font("TimesNewRoman", Font.ITALIC + Font.BOLD, 28));
         label.setForeground(new Color(232, 56, 0));
         label.setVerticalAlignment(JLabel.TOP);
     }
@@ -118,10 +118,10 @@ public class MainWindow extends JFrame {
 
         createMathFunctionButton.addActionListener(event -> {
             try {
-                int countOld = xValues.size();
-                MathTableWindow.main(factory, tableModel::setFunction);
-                int countNew = tableModel.getFunction().getCount();
-                wrapTable(countOld, countNew);
+            int countOld = xValues.size();
+            MathTableWindow.main(factory, tableModel::setFunction);
+            int countNew = tableModel.getFunction().getCount();
+            wrapTable(countOld, countNew);
             } catch (Exception e) {
                 if (e instanceof NullPointerException) {
                     e.printStackTrace();
@@ -132,10 +132,10 @@ public class MainWindow extends JFrame {
 
         openButton.addActionListener(event -> {
             try {
-                int countOld = xValues.size();
-                FileReader.main(tableModel::setFunction);
-                int countNew = tableModel.getFunction().getCount();
-                wrapTable(countOld, countNew);
+            int countOld = xValues.size();
+            FileReader.main(tableModel::setFunction);
+            int countNew = tableModel.getFunction().getCount();
+            wrapTable(countOld, countNew);
             } catch (Exception e) {
                 if (e instanceof NullPointerException) {
                     e.printStackTrace();
@@ -186,7 +186,8 @@ public class MainWindow extends JFrame {
         JScrollPane tableScrollPane = new JScrollPane(table);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup()
-                        .addComponent(label)
+                        .addComponent(label))
+                .addGroup(layout.createSequentialGroup()
                         .addComponent(topLabel))
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(createFunctionButton)
@@ -203,7 +204,8 @@ public class MainWindow extends JFrame {
 
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                        .addComponent(label)
+                        .addComponent(label))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addComponent(topLabel))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addComponent(createFunctionButton)

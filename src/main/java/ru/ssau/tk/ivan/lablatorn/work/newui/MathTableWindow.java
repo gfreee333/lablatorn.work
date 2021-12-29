@@ -34,7 +34,7 @@ public class MathTableWindow extends JDialog {
 
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 150);
         allFunctions();
 
