@@ -46,7 +46,7 @@ public class MathTableWindow extends JDialog {
         container.add(toField);
         container.add(buttonCreateFunction);
         container.add(functionComboBox);
-        container.setBackground(Color.PINK);
+        container.setBackground(new Color(232, 56, 0));
 
         fromLabel.setForeground(new Color(45,57,22));
         toLabel.setForeground(new Color(45,57,22));
@@ -56,7 +56,7 @@ public class MathTableWindow extends JDialog {
         buttonCreateFunction.setForeground(new Color(232, 56, 0));
 
         functionComboBox.setForeground(new Color(45,57,22));
-        functionComboBox.setBackground(new Color(232, 56, 0));
+        functionComboBox.setBackground(Color.WHITE);
 
         compose();
         addButtonListeners(callback);
@@ -123,7 +123,7 @@ public class MathTableWindow extends JDialog {
         nameFunctionMap.put("Тождественная функция", new IdentityFunction());
         nameFunctionMap.put("Функция кубического корня", new ThreeRootFunction());
         nameFunctionMap.put("Функция тангенса", new TangFunction());
-        String[] functions = new String[7];
+        String[] functions = new String[6];
         int i = 0;
         for (String string : nameFunctionMap.keySet()) {
             functions[i++] = string;

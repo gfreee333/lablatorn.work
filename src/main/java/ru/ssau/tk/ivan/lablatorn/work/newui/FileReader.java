@@ -19,7 +19,7 @@ public class FileReader extends JDialog {
     public FileReader(Consumer<? super TabulatedFunction> callback) {
         setModal(true);
         JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         chooser.addChoosableFileFilter(
                 new FileNameExtensionFilter("Bin files", "bin"));
 

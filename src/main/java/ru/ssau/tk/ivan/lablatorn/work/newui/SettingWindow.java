@@ -33,8 +33,8 @@ public class SettingWindow extends JDialog {
         button.setBackground(new Color(45,57,22));
         button.setForeground(new Color(232, 56, 0));
 
-        functionComboBox.setForeground(new Color(232, 56, 0));
-        functionComboBox.setBackground(new Color(45,57,22));
+        functionComboBox.setForeground(Color.BLACK);
+        functionComboBox.setBackground(Color.WHITE);
 
         fillMap();
         compose();

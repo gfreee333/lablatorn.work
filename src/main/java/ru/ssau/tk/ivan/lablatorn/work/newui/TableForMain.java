@@ -8,7 +8,8 @@ public class TableForMain extends AbstractTableModel {
     private static final int INDEX_COLUMN_NUMBER = 0;
     private static final int X_COLUMN_NUMBER = 1;
     private static final int Y_COLUMN_NUMBER = 2;
-    private static final long serialVersionUID = 5627188898700040102L;
+    private static final long serialVersionUID = -712141675115893149L;
+
     private TabulatedFunction function;
 
     public TableForMain() {

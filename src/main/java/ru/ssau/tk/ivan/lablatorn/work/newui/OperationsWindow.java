@@ -99,7 +99,7 @@ public class OperationsWindow extends JFrame {
     }
 
     public void designTable(JTable table) {
-        table.setBackground(new Color(45,57,22));
+        table.setBackground(Color.WHITE);
         table.setGridColor(new Color(232, 56, 0));
     }
 

@@ -74,17 +74,17 @@ public class MainWindow extends JFrame {
     }
 
     public void designTable(JTable table) {
-        table.setBackground(new Color(45,57,22));
+        table.setBackground(Color.WHITE);
         table.setGridColor(new Color(232, 56, 0));
     }
 
     private void wrapTable(int countOld, int countNew) {
         tableModel.fireTableDataChanged();
-        for (int i = 0; i <= countOld; ++i) {
+        for (int i = 0; i <= countOld; i++) {
             if (xValues.size() != 0) xValues.remove(countOld - i);
             if (yValues.size() != 0) yValues.remove(countOld - i);
         }
-        for (int i = 0; i < countNew; ++i) {
+        for (int i = 0; i < countNew; i++) {
             xValues.add(tableModel.getFunction().getX(i));
             yValues.add(tableModel.getFunction().getY(i));
         }

@@ -41,7 +41,7 @@ public class TabulatedTableWindow extends JDialog {
         container.add(createFunctionButton);
 
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table.setBackground(new Color(45,57,22));
+        table.setBackground(Color.WHITE);
         table.setGridColor(new Color(232, 56, 0));
 
         label.setForeground(new Color(45,57,22));
